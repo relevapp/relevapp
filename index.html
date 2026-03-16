@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RELEVAPP Pro v9.1</title>
+    <!-- Ajuste crucial para móviles: Evita el auto-zoom al tocar inputs -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RELEVAPP Pro v9.3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @media print {
@@ -74,6 +75,19 @@
         .animate-fade-in {
             animation: fadeIn 0.4s ease-out forwards;
         }
+        
+        /* Custom scrollbar para moviles */
+        .overflow-x-auto::-webkit-scrollbar {
+            height: 6px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 4px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
     </style>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0f172a">
@@ -82,101 +96,105 @@
 <body class="bg-slate-50 min-h-screen font-sans text-slate-900">
 
     <!-- Header Dinámico -->
-    <header class="bg-slate-800 text-white p-4 shadow-md no-print sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-4">
-                <!-- Botón Volver (Oculto en inicio) -->
-                <button id="btn-back" onclick="goHome()" class="hidden bg-slate-700 hover:bg-slate-600 p-2 rounded-lg transition-colors flex items-center justify-center">
+    <header class="bg-slate-800 text-white p-3 md:p-4 shadow-md no-print sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center gap-2">
+            <div class="flex items-center gap-2 md:gap-4">
+                <!-- Botón Volver -->
+                <button id="btn-back" onclick="goHome()" class="hidden bg-slate-700 hover:bg-slate-600 p-2 rounded-lg transition-colors items-center justify-center shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                     </svg>
                 </button>
                 
-                <h1 class="text-xl font-bold flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <h1 class="text-base md:text-xl font-bold flex items-center gap-1.5 md:gap-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
-                    RELEVAPP Pro <span class="text-[10px] bg-blue-500 px-2 py-0.5 rounded-full ml-1">v9.1</span>
+                    RELEVAPP Pro <span class="text-[9px] md:text-[10px] bg-blue-500 px-1.5 py-0.5 rounded-full ml-0.5 md:ml-1">v9.3</span>
                 </h1>
             </div>
 
-            <!-- Acciones de Cabecera (Ocultas en inicio) -->
-            <div id="header-actions" class="hidden flex items-center gap-4">
+            <!-- Acciones de Cabecera -->
+            <div id="header-actions" class="hidden items-center gap-2 md:gap-4 shrink-0">
                 <div id="global-net-badge" class="hidden md:flex bg-slate-700 px-3 py-1 rounded-full border border-slate-600 items-center gap-2">
                     <span class="text-[10px] uppercase font-bold text-slate-400">Progreso Red:</span>
                     <span id="global-net-counter" class="text-xs font-black text-white">0 / 0</span>
                 </div>
-                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 text-sm shadow-md">
-                    Exportar / Imprimir
+                <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 md:px-4 md:py-2 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-sm shadow-md" title="Exportar / Imprimir">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    <span class="hidden md:inline">Exportar / Imprimir</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-6 lg:max-w-5xl">
+    <main class="container mx-auto p-3 sm:p-4 md:p-6 lg:max-w-5xl">
 
         <!-- ========================================== -->
         <!-- PANTALLA DE INICIO (DASHBOARD) -->
         <!-- ========================================== -->
-        <div id="view-home" class="py-8 no-print">
-            <div class="text-center mb-10 animate-fade-in">
-                <h2 class="text-3xl font-black text-slate-800 mb-2 tracking-tight">Bienvenido a RELEVAPP</h2>
-                <p class="text-slate-500">Selecciona el módulo de trabajo para comenzar un nuevo relevamiento.</p>
+        <div id="view-home" class="py-6 md:py-8 no-print">
+            <div class="text-center mb-6 md:mb-10 animate-fade-in px-4">
+                <h2 class="text-2xl md:text-3xl font-black text-slate-800 mb-2 tracking-tight">Bienvenido a RELEVAPP</h2>
+                <p class="text-xs sm:text-sm md:text-base text-slate-500">Selecciona el módulo de trabajo para comenzar un nuevo relevamiento.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <!-- Ajuste crucial: grid-cols-2 fuerza 2 columnas en TODAS las pantallas -->
+            <div class="grid grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto px-3 md:px-0">
                 
                 <!-- TARJETA 1: REDES Y CCTV -->
-                <div onclick="openModule('redes-cctv')" class="cursor-pointer bg-white rounded-2xl shadow-sm border-2 border-transparent hover:border-blue-500 hover:shadow-xl transition-all p-8 flex flex-col items-center justify-center gap-4 group animate-fade-in" style="animation-delay: 0.1s;">
-                    <div class="w-24 h-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div onclick="openModule('redes-cctv')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-blue-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-black text-slate-800 uppercase tracking-wide">Redes y CCTV</h3>
-                    <p class="text-sm text-slate-500 text-center font-medium">Presupuesto integral de cámaras, cableado estructurado, racks y energía.</p>
+                    <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">Redes y CCTV</h3>
+                    <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Presupuesto integral de cámaras, cableado, racks y energía.</p>
                 </div>
 
                 <!-- TARJETA 2: ALARMA Y VIDEOPORTERO -->
-                <div onclick="openModule('alarma')" class="cursor-pointer bg-white rounded-2xl shadow-sm border-2 border-transparent hover:border-purple-500 hover:shadow-xl transition-all p-8 flex flex-col items-center justify-center gap-4 group animate-fade-in" style="animation-delay: 0.2s;">
-                    <div class="w-24 h-24 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div onclick="openModule('alarma')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-purple-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-black text-slate-800 uppercase tracking-wide">Alarma y Videoport.</h3>
-                    <p class="text-sm text-slate-500 text-center font-medium">Sistemas de intrusión, sirenas, sensores y control de accesos.</p>
+                    <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">Alarma y Videoport.</h3>
+                    <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Sistemas de intrusión, sirenas, sensores y accesos.</p>
                 </div>
 
                 <!-- TARJETA 3: PCI DETECCIÓN -->
-                <div onclick="openModule('pci')" class="cursor-pointer bg-white rounded-2xl shadow-sm border-2 border-transparent hover:border-red-500 hover:shadow-xl transition-all p-8 flex flex-col items-center justify-center gap-4 group animate-fade-in" style="animation-delay: 0.3s;">
-                    <div class="w-24 h-24 bg-red-50 text-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div onclick="openModule('pci')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-red-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-red-50 text-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-black text-slate-800 uppercase tracking-wide">PCI Detección</h3>
-                    <p class="text-sm text-slate-500 text-center font-medium">Prevención Contra Incendios, detectores de humo, calor y paneles.</p>
+                    <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">PCI Detección</h3>
+                    <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Prevención Contra Incendios, detectores y paneles.</p>
                 </div>
 
                 <!-- TARJETA 4: ELECTRICIDAD -->
-                <div onclick="openModule('electricidad')" class="cursor-pointer bg-white rounded-2xl shadow-sm border-2 border-transparent hover:border-amber-500 hover:shadow-xl transition-all p-8 flex flex-col items-center justify-center gap-4 group animate-fade-in" style="animation-delay: 0.4s;">
-                    <div class="w-24 h-24 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div onclick="openModule('electricidad')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-amber-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-black text-slate-800 uppercase tracking-wide">Electricidad</h3>
-                    <p class="text-sm text-slate-500 text-center font-medium">Tendido eléctrico general, tableros, térmicas y luminarias.</p>
+                    <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">Electricidad</h3>
+                    <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Tendido eléctrico general, tableros y luminarias.</p>
                 </div>
 
             </div>
             
             <!-- ALERTA DE CONSTRUCCIÓN -->
-            <div id="construction-alert" class="hidden max-w-md mx-auto mt-8 bg-slate-800 text-white p-4 rounded-xl shadow-lg flex items-center gap-4 animate-fade-in">
-                <div class="bg-amber-500 text-white p-2 rounded-full">
+            <div id="construction-alert" class="hidden max-w-md mx-auto mt-6 bg-slate-800 text-white p-3 md:p-4 rounded-xl shadow-lg items-center gap-3 md:gap-4 animate-fade-in mx-4">
+                <div class="bg-amber-500 text-white p-2 rounded-full shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                     </svg>
@@ -190,29 +208,29 @@
 
 
         <!-- ========================================== -->
-        <!-- MÓDULO 1: REDES Y CCTV (V8.28+)            -->
+        <!-- MÓDULO 1: REDES Y CCTV                     -->
         <!-- ========================================== -->
         <div id="view-module-redes" class="hidden animate-fade-in">
             
             <!-- Datos del Cliente -->
-            <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mb-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-5 mb-4 md:mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                     <div>
                         <label class="text-xs font-bold uppercase text-slate-500">Cliente / Proyecto</label>
-                        <input type="text" id="client-name" class="w-full border-b border-slate-200 focus:border-blue-500 outline-none py-1 text-lg font-medium" placeholder="Nombre del cliente">
+                        <input type="text" id="client-name" class="w-full border-b border-slate-200 focus:border-blue-500 outline-none py-1 text-base md:text-lg font-medium" placeholder="Nombre del cliente">
                     </div>
                     <div>
                         <label class="text-xs font-bold uppercase text-slate-500">Fecha</label>
-                        <input type="date" id="doc-date" class="w-full border-b border-slate-200 focus:border-blue-500 outline-none py-1 text-lg font-medium">
+                        <input type="date" id="doc-date" class="w-full border-b border-slate-200 focus:border-blue-500 outline-none py-1 text-base md:text-lg font-medium">
                     </div>
                 </div>
             </section>
 
             <!-- CONFIGURADOR POR SECCIONES ADAPTATIVO -->
-            <div id="sections-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 no-print">
+            <div id="sections-container" class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8 no-print">
                 
                 <!-- 1. INFRAESTRUCTURA -->
-                <section id="sec-infra" class="section-step bg-blue-50 rounded-xl border border-blue-200 p-5 shadow-sm order-1">
+                <section id="sec-infra" class="section-step bg-blue-50 rounded-xl border border-blue-200 p-4 md:p-5 shadow-sm order-1">
                     <h2 class="text-blue-800 font-black mb-4 uppercase text-[10px] tracking-widest flex items-center gap-2">
                         <span class="step-number bg-blue-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">1</span>
                         Infraestructura Tecnológica
@@ -228,7 +246,7 @@
                         </div>
 
                         <div id="cctv-fields" class="space-y-3 hidden">
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div>
                                     <label class="block text-[9px] font-bold text-slate-500 uppercase">Marca de Equipos</label>
                                     <select id="cctv-brand" onchange="updateCameraOptions()" class="w-full p-2 border border-blue-200 rounded-lg text-xs font-bold bg-white">
@@ -246,14 +264,14 @@
 
                             <!-- CÁLCULO DE ALMACENAMIENTO -->
                             <div class="bg-blue-100/50 p-3 rounded-lg border border-blue-200 shadow-inner">
-                                <div class="flex justify-between items-center mb-2">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2">
                                     <label class="text-[9px] font-bold text-blue-800 uppercase flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s-8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
                                         </svg>
                                         Almacenamiento (H.265+)
                                     </label>
-                                    <select id="storage-retention" onchange="calculateStorage()" class="p-1 border border-blue-300 rounded text-[9px] font-bold bg-white text-blue-800 outline-none">
+                                    <select id="storage-retention" onchange="calculateStorage()" class="w-full sm:w-auto p-1.5 border border-blue-300 rounded text-[10px] font-bold bg-white text-blue-800 outline-none">
                                         <option value="15">15 Días</option>
                                         <option value="30" selected>1 Mes (30 días)</option>
                                         <option value="60">2 Meses (60 días)</option>
@@ -262,78 +280,80 @@
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div class="bg-white p-2 rounded border border-blue-100 text-center shadow-sm">
-                                        <span class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Espacio Requerido</span>
-                                        <span id="storage-calculated" class="text-sm font-black text-slate-700">0.00 TB</span>
+                                        <span class="block text-[8px] font-bold text-slate-400 uppercase mb-0.5">Espacio Req.</span>
+                                        <span id="storage-calculated" class="text-xs md:text-sm font-black text-slate-700">0.00 TB</span>
                                     </div>
                                     <div class="bg-white p-2 rounded border border-blue-200 text-center shadow-sm">
-                                        <span class="block text-[8px] font-bold text-blue-600 uppercase mb-1">Disco Recomendado</span>
-                                        <span id="storage-recommended" class="text-sm font-black text-blue-700">0 TB</span>
+                                        <span class="block text-[8px] font-bold text-blue-600 uppercase mb-0.5">Sugerido</span>
+                                        <span id="storage-recommended" class="text-xs md:text-sm font-black text-blue-700">0 TB</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="bg-white p-2 rounded-lg border border-blue-100 shadow-inner">
-                                <div class="grid grid-cols-12 gap-1 mb-1 px-1">
-                                    <div class="col-span-2 text-[8px] font-black text-slate-400 uppercase text-center">Cant.</div>
-                                    <div class="col-span-4 text-[8px] font-black text-slate-400 uppercase">Tipo de Cámara</div>
-                                    <div class="col-span-3 text-[8px] font-black text-slate-400 uppercase">Resolución</div>
-                                    <div class="col-span-3 text-[8px] font-black text-slate-400 uppercase">Montaje en</div>
-                                </div>
-                                <div class="space-y-1">
-                                    <!-- Líneas de Cámara -->
-                                    <div class="grid grid-cols-12 gap-1">
-                                        <div class="col-span-2"><input type="number" id="cam-count-1" min="0" value="0" oninput="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-center font-bold text-xs"></div>
-                                        <div class="col-span-4"><select id="cctv-cam-type-1" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3"><select id="cctv-cam-mp-1" onchange="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3">
-                                            <select id="cctv-cam-surface-1" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white">
-                                                <option value="Mampostería">Mampost. / Concreto</option>
-                                                <option value="Metal">Estruc. Metálica</option>
-                                            </select>
-                                        </div>
+                            <div class="bg-white rounded-lg border border-blue-100 shadow-inner overflow-x-auto">
+                                <div class="min-w-[380px] p-2">
+                                    <div class="grid grid-cols-12 gap-1 mb-1 px-1">
+                                        <div class="col-span-2 text-[8px] font-black text-slate-400 uppercase text-center">Cant.</div>
+                                        <div class="col-span-4 text-[8px] font-black text-slate-400 uppercase">Tipo de Cámara</div>
+                                        <div class="col-span-3 text-[8px] font-black text-slate-400 uppercase">Resolución</div>
+                                        <div class="col-span-3 text-[8px] font-black text-slate-400 uppercase">Montaje en</div>
                                     </div>
-                                    <div class="grid grid-cols-12 gap-1">
-                                        <div class="col-span-2"><input type="number" id="cam-count-2" min="0" value="0" oninput="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-center font-bold text-xs"></div>
-                                        <div class="col-span-4"><select id="cctv-cam-type-2" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3"><select id="cctv-cam-mp-2" onchange="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3">
-                                            <select id="cctv-cam-surface-2" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white">
-                                                <option value="Mampostería">Mampost. / Concreto</option>
-                                                <option value="Metal">Estruc. Metálica</option>
-                                            </select>
+                                    <div class="space-y-1">
+                                        <!-- Líneas de Cámara -->
+                                        <div class="grid grid-cols-12 gap-1">
+                                            <div class="col-span-2"><input type="number" id="cam-count-1" min="0" value="0" oninput="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-center font-bold text-xs h-7"></div>
+                                            <div class="col-span-4"><select id="cctv-cam-type-1" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3"><select id="cctv-cam-mp-1" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3">
+                                                <select id="cctv-cam-surface-1" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
+                                                    <option value="Mampostería">Mampost. / Conc.</option>
+                                                    <option value="Metal">Estruct. Metál.</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="grid grid-cols-12 gap-1">
-                                        <div class="col-span-2"><input type="number" id="cam-count-3" min="0" value="0" oninput="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-center font-bold text-xs"></div>
-                                        <div class="col-span-4"><select id="cctv-cam-type-3" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3"><select id="cctv-cam-mp-3" onchange="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3">
-                                            <select id="cctv-cam-surface-3" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white">
-                                                <option value="Mampostería">Mampost. / Concreto</option>
-                                                <option value="Metal">Estruc. Metálica</option>
-                                            </select>
+                                        <div class="grid grid-cols-12 gap-1">
+                                            <div class="col-span-2"><input type="number" id="cam-count-2" min="0" value="0" oninput="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-center font-bold text-xs h-7"></div>
+                                            <div class="col-span-4"><select id="cctv-cam-type-2" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3"><select id="cctv-cam-mp-2" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3">
+                                                <select id="cctv-cam-surface-2" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
+                                                    <option value="Mampostería">Mampost. / Conc.</option>
+                                                    <option value="Metal">Estruct. Metál.</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="grid grid-cols-12 gap-1">
-                                        <div class="col-span-2"><input type="number" id="cam-count-4" min="0" value="0" oninput="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-center font-bold text-xs"></div>
-                                        <div class="col-span-4"><select id="cctv-cam-type-4" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3"><select id="cctv-cam-mp-4" onchange="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3">
-                                            <select id="cctv-cam-surface-4" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white">
-                                                <option value="Mampostería">Mampost. / Concreto</option>
-                                                <option value="Metal">Estruc. Metálica</option>
-                                            </select>
+                                        <div class="grid grid-cols-12 gap-1">
+                                            <div class="col-span-2"><input type="number" id="cam-count-3" min="0" value="0" oninput="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-center font-bold text-xs h-7"></div>
+                                            <div class="col-span-4"><select id="cctv-cam-type-3" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3"><select id="cctv-cam-mp-3" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3">
+                                                <select id="cctv-cam-surface-3" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
+                                                    <option value="Mampostería">Mampost. / Conc.</option>
+                                                    <option value="Metal">Estruct. Metál.</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="grid grid-cols-12 gap-1">
-                                        <div class="col-span-2"><input type="number" id="cam-count-5" min="0" value="0" oninput="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-center font-bold text-xs"></div>
-                                        <div class="col-span-4"><select id="cctv-cam-type-5" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3"><select id="cctv-cam-mp-5" onchange="calculateStorage()" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white"></select></div>
-                                        <div class="col-span-3">
-                                            <select id="cctv-cam-surface-5" class="w-full p-1.5 border border-blue-200 rounded text-[9px] font-bold bg-white">
-                                                <option value="Mampostería">Mampost. / Concreto</option>
-                                                <option value="Metal">Estruc. Metálica</option>
-                                            </select>
+                                        <div class="grid grid-cols-12 gap-1">
+                                            <div class="col-span-2"><input type="number" id="cam-count-4" min="0" value="0" oninput="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-center font-bold text-xs h-7"></div>
+                                            <div class="col-span-4"><select id="cctv-cam-type-4" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3"><select id="cctv-cam-mp-4" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3">
+                                                <select id="cctv-cam-surface-4" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
+                                                    <option value="Mampostería">Mampost. / Conc.</option>
+                                                    <option value="Metal">Estruct. Metál.</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="grid grid-cols-12 gap-1">
+                                            <div class="col-span-2"><input type="number" id="cam-count-5" min="0" value="0" oninput="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-center font-bold text-xs h-7"></div>
+                                            <div class="col-span-4"><select id="cctv-cam-type-5" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3"><select id="cctv-cam-mp-5" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
+                                            <div class="col-span-3">
+                                                <select id="cctv-cam-surface-5" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
+                                                    <option value="Mampostería">Mampost. / Conc.</option>
+                                                    <option value="Metal">Estruct. Metál.</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -343,9 +363,9 @@
                         <div id="net-fields" class="space-y-3">
                             <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-inner">
                                 <!-- DISEÑO AP -->
-                                <div class="flex flex-col md:flex-row md:items-center justify-between bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3 shadow-sm gap-2">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3 shadow-sm gap-3">
                                     <div class="flex items-center gap-3">
-                                        <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md">
+                                        <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md shrink-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
                                             </svg>
@@ -355,32 +375,32 @@
                                             <span class="block text-[8px] text-blue-600 font-bold uppercase mt-0.5">Define la cantidad de APs</span>
                                         </div>
                                     </div>
-                                    <input type="number" id="ap-count" min="0" value="0" oninput="toggleAPLogic(); autoCalculateNetworking();" class="w-full md:w-20 h-10 border-2 border-blue-300 rounded-lg text-center font-black text-lg text-blue-800 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
+                                    <input type="number" id="ap-count" min="0" value="0" oninput="toggleAPLogic(); autoCalculateNetworking();" class="w-full sm:w-20 h-10 border-2 border-blue-300 rounded-lg text-center font-black text-lg text-blue-800 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
                                 </div>
                                 
                                 <div id="ap-logic-container" class="hidden space-y-3 pt-2 border-t border-blue-100">
-                                    <div class="grid grid-cols-1 gap-2">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         <div class="bg-slate-50 p-2 rounded border border-slate-200">
-                                            <label class="block text-[8px] font-black text-blue-600 uppercase mb-1">Inicio de Cableado (Rack/Switch)</label>
+                                            <label class="block text-[8px] font-black text-blue-600 uppercase mb-1">Inicio (Lado Rack)</label>
                                             <div class="grid grid-cols-2 gap-1">
-                                                <select id="ap-start-type" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white">
+                                                <select id="ap-start-type" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
                                                     <option value="Ficha RJ45">Ficha RJ45</option>
                                                     <option value="Jack Keystone">Jack Keystone</option>
                                                 </select>
-                                                <select id="ap-start-shield" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white">
+                                                <select id="ap-start-shield" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
                                                     <option value="Sin Blindaje">Sin Blindaje</option>
                                                     <option value="Blindado">Blindado</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="bg-slate-50 p-2 rounded border border-slate-200">
-                                            <label class="block text-[8px] font-black text-blue-600 uppercase mb-1">Fin de Cableado (Lado AP)</label>
+                                            <label class="block text-[8px] font-black text-blue-600 uppercase mb-1">Fin (Lado AP)</label>
                                             <div class="grid grid-cols-2 gap-1">
-                                                <select id="ap-end-type" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white">
+                                                <select id="ap-end-type" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
                                                     <option value="Ficha RJ45">Ficha RJ45</option>
                                                     <option value="Jack Keystone">Jack Keystone</option>
                                                 </select>
-                                                <select id="ap-end-shield" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white">
+                                                <select id="ap-end-shield" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
                                                     <option value="Sin Blindaje">Sin Blindaje</option>
                                                     <option value="Blindado">Blindado</option>
                                                 </select>
@@ -392,19 +412,19 @@
 
                             <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-inner">
                                 <!-- DISEÑO METAS DE RED -->
-                                <div class="flex flex-col md:flex-row md:items-center justify-between bg-blue-50 border border-blue-200 rounded-lg p-2 shadow-sm gap-2">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-blue-50 border border-blue-200 rounded-lg p-2 shadow-sm gap-3">
                                     <div class="flex items-center gap-3">
-                                        <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md">
+                                        <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md shrink-0">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                             </svg>
                                         </div>
                                         <div>
                                             <label class="block text-[11px] font-black text-blue-900 uppercase">Meta: Puestos Red Totales</label>
-                                            <span class="block text-[8px] text-blue-600 font-bold uppercase mt-0.5">Bocas de red que requiere el proyecto</span>
+                                            <span class="block text-[8px] text-blue-600 font-bold uppercase mt-0.5">Bocas de red del proyecto</span>
                                         </div>
                                     </div>
-                                    <input type="number" id="net-points" min="0" value="0" oninput="autoCalculateNetworking()" class="w-full md:w-20 h-10 border-2 border-blue-300 rounded-lg text-center font-black text-lg text-blue-800 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
+                                    <input type="number" id="net-points" min="0" value="0" oninput="autoCalculateNetworking()" class="w-full sm:w-20 h-10 border-2 border-blue-300 rounded-lg text-center font-black text-lg text-blue-800 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
                                 </div>
                             </div>
                         </div>
@@ -412,11 +432,11 @@
                         <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-inner mt-2">
                             <label class="block text-[10px] font-black text-blue-700 uppercase mb-2">Cableado Estructurado Principal</label>
                             <div class="grid grid-cols-12 gap-2">
-                                <div class="col-span-4 md:col-span-3">
+                                <div class="col-span-12 sm:col-span-4 md:col-span-3">
                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Metros</label>
                                     <input type="number" id="cable-meters" min="0" value="0" class="w-full h-9 px-2 py-1 border border-blue-200 rounded-md text-center text-xs font-bold bg-slate-50 focus:bg-white outline-none transition-colors">
                                 </div>
-                                <div class="col-span-8 md:col-span-3">
+                                <div class="col-span-12 sm:col-span-8 md:col-span-3">
                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Categoría</label>
                                     <select id="cable-cat" onchange="updateCableTypes()" class="w-full h-9 px-2 py-1 border border-blue-200 rounded-md text-xs font-bold bg-slate-50 focus:bg-white outline-none transition-colors">
                                         <option value="Cat 5e">Cat 5e</option>
@@ -435,20 +455,20 @@
                             </div>
                         </div>
                         
-                        <button onclick="addCalculatedToTable()" class="w-full bg-blue-600 text-white p-2 rounded-lg font-bold hover:bg-blue-700 transition text-[10px] uppercase shadow-md">
+                        <button onclick="addCalculatedToTable()" class="w-full bg-blue-600 text-white p-3 rounded-lg font-bold hover:bg-blue-700 transition text-[10px] uppercase shadow-md active:bg-blue-800">
                             Cargar Sección Principal
                         </button>
                     </div>
                 </section>
 
                 <!-- 2. TERMINACIÓN DATOS -->
-                <section id="sec-networking-data" class="section-step bg-indigo-50 rounded-xl border border-indigo-200 p-5 shadow-sm order-2">
+                <section id="sec-networking-data" class="section-step bg-indigo-50 rounded-xl border border-indigo-200 p-4 md:p-5 shadow-sm order-2">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-indigo-800 font-black uppercase text-[10px] tracking-widest flex items-center gap-2">
-                            <span class="step-number bg-indigo-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">2</span>
+                            <span class="step-number bg-indigo-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">2</span>
                             Terminación de Datos
                         </h2>
-                        <div id="net-status-pill" class="text-[8px] font-black px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-400 uppercase">
+                        <div id="net-status-pill" class="text-[8px] font-black px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-400 uppercase shrink-0">
                             Sin Meta
                         </div>
                     </div>
@@ -458,15 +478,15 @@
                             <label class="block text-[9px] font-bold text-slate-500 uppercase mb-2">Placas de Pared</label>
                             <div class="grid grid-cols-3 gap-2">
                                 <div class="bg-white p-2 border border-indigo-100 rounded-lg text-center shadow-sm">
-                                    <label class="block text-[9px] font-bold text-indigo-600 uppercase mb-1">Simple (1)</label>
+                                    <label class="block text-[8px] md:text-[9px] font-bold text-indigo-600 uppercase mb-1">Simple (1)</label>
                                     <input type="number" id="rj45-qty-1" min="0" value="0" oninput="autoCalculateNetworking()" class="w-full border-b border-indigo-200 outline-none text-center font-bold text-sm bg-transparent">
                                 </div>
                                 <div class="bg-white p-2 border border-indigo-100 rounded-lg text-center shadow-sm">
-                                    <label class="block text-[9px] font-bold text-indigo-600 uppercase mb-1">Doble (2)</label>
+                                    <label class="block text-[8px] md:text-[9px] font-bold text-indigo-600 uppercase mb-1">Doble (2)</label>
                                     <input type="number" id="rj45-qty-2" min="0" value="0" oninput="autoCalculateNetworking()" class="w-full border-b border-indigo-200 outline-none text-center font-bold text-sm bg-transparent">
                                 </div>
                                 <div class="bg-white p-2 border border-indigo-100 rounded-lg text-center shadow-sm">
-                                    <label class="block text-[9px] font-bold text-indigo-600 uppercase mb-1">Cuádruple (4)</label>
+                                    <label class="block text-[8px] md:text-[9px] font-bold text-indigo-600 uppercase mb-1">Cuád. (4)</label>
                                     <input type="number" id="rj45-qty-4" min="0" value="0" oninput="autoCalculateNetworking()" class="w-full border-b border-indigo-200 outline-none text-center font-bold text-sm bg-transparent">
                                 </div>
                             </div>
@@ -475,7 +495,7 @@
                         <!-- MONITOR DE PROGRESO DE RED -->
                         <div class="bg-white p-3 rounded-lg border border-indigo-200 shadow-inner">
                             <div class="flex justify-between text-[10px] font-bold uppercase mb-1">
-                                <span class="text-slate-500">Bocas Asignadas: <span id="monitor-assigned" class="text-indigo-600">0</span></span>
+                                <span class="text-slate-500">Asignadas: <span id="monitor-assigned" class="text-indigo-600">0</span></span>
                                 <span class="text-slate-500">Restantes: <span id="monitor-remaining" class="text-slate-700">0</span></span>
                             </div>
                             <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
@@ -485,16 +505,16 @@
 
                         <div class="border-t border-indigo-100 pt-3 space-y-3">
                             <div class="bg-white p-3 rounded-lg border border-indigo-200">
-                                <label class="flex items-center gap-2 cursor-pointer mb-2">
+                                <label class="flex items-center gap-2 cursor-pointer mb-3">
                                     <input type="checkbox" id="include-keystone" onchange="toggleManualNetworking('keystone')" class="w-4 h-4 text-indigo-600 rounded">
                                     <span class="text-[10px] font-bold text-slate-700 uppercase">Jack Keystone RJ45 Cat6</span>
                                 </label>
-                                <div class="grid grid-cols-2 gap-2">
-                                    <select id="keystone-shield" class="w-full p-1 border border-slate-200 rounded text-[10px] font-bold bg-white">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                    <select id="keystone-shield" class="w-full p-2 sm:p-1 border border-slate-200 rounded text-[10px] font-bold bg-white">
                                         <option value="Sin Blindaje">Sin Blindaje</option>
                                         <option value="Blindado">Blindado</option>
                                     </select>
-                                    <input type="number" id="keystone-qty" min="0" value="0" disabled class="w-full p-1 border border-slate-200 rounded text-center font-bold text-xs bg-slate-50">
+                                    <input type="number" id="keystone-qty" min="0" value="0" disabled class="w-full p-2 sm:p-1 border border-slate-200 rounded text-center font-bold text-xs bg-slate-50">
                                 </div>
                             </div>
 
@@ -507,22 +527,22 @@
                             </div>
                         </div>
 
-                        <button onclick="addNetworkingDetails()" class="w-full bg-indigo-600 text-white p-2 rounded-lg font-bold hover:bg-indigo-700 transition text-[10px] uppercase shadow-md">
+                        <button onclick="addNetworkingDetails()" class="w-full bg-indigo-600 text-white p-3 rounded-lg font-bold hover:bg-indigo-700 transition text-[10px] uppercase shadow-md active:bg-indigo-800">
                             Cargar Terminaciones
                         </button>
                     </div>
                 </section>
 
                 <!-- 3. RACK Y ENERGÍA DE RESPALDO -->
-                <section id="sec-rack" class="section-step bg-slate-100 rounded-xl border border-slate-300 p-5 shadow-sm order-3">
+                <section id="sec-rack" class="section-step bg-slate-100 rounded-xl border border-slate-300 p-4 md:p-5 shadow-sm order-3">
                     <h2 class="text-slate-800 font-black mb-4 uppercase text-[10px] tracking-widest flex items-center gap-2">
-                        <span class="step-number bg-slate-800 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">3</span>
+                        <span class="step-number bg-slate-800 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">3</span>
                         Rack y Energía de Respaldo
                     </h2>
                     <div class="space-y-3">
                         <div>
                             <label class="block text-[9px] font-bold text-slate-500 uppercase">Medida de Rack Mural</label>
-                            <select id="rack-size" class="w-full p-2 border border-slate-300 rounded-lg text-xs font-bold bg-white">
+                            <select id="rack-size" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs font-bold bg-white">
                                 <option value="0">Sin Rack</option>
                                 <option value="4">Rack Mural 4U</option>
                                 <option value="6">Rack Mural 6U</option>
@@ -531,37 +551,37 @@
                             </select>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-2 bg-white p-2 border border-slate-200 rounded-lg items-center">
+                        <div class="grid grid-cols-2 gap-2 bg-white p-2.5 border border-slate-200 rounded-lg items-center">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" id="include-tray" onchange="toggleTrayQty()" class="w-4 h-4 text-blue-600 rounded">
                                 <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir Bandeja</span>
                             </label>
-                            <input type="number" id="tray-qty" min="1" value="1" disabled class="w-full p-1 border border-slate-200 rounded text-center font-bold text-xs">
+                            <input type="number" id="tray-qty" min="1" value="1" disabled class="w-full p-1.5 border border-slate-200 rounded text-center font-bold text-xs">
                         </div>
 
-                        <div class="bg-white p-2 border border-slate-200 rounded-lg space-y-2">
+                        <div class="bg-white p-3 border border-slate-200 rounded-lg space-y-3">
                             <div class="flex justify-between items-center">
                                 <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="checkbox" id="include-patchpanel" onchange="togglePatchPanel()" class="w-4 h-4 text-blue-600 rounded">
-                                    <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir Pachera (Patch Panel)</span>
+                                    <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir Pachera</span>
                                 </label>
                                 <span id="patchpanel-calc-badge" class="text-[9px] font-black px-2 py-0.5 rounded bg-slate-100 text-slate-400">Auto: 0 un.</span>
                             </div>
-                            <select id="patchpanel-type" disabled onchange="updatePatchPanelPreview()" class="w-full p-1 border border-slate-200 rounded text-[10px] font-bold bg-slate-50 transition-colors">
+                            <select id="patchpanel-type" disabled onchange="updatePatchPanelPreview()" class="w-full p-2 border border-slate-200 rounded text-[10px] font-bold bg-slate-50 transition-colors">
                                 <option value="24">Patch Panel 24 Puertos Cat6</option>
                                 <option value="48">Patch Panel 48 Puertos Cat6</option>
                             </select>
                         </div>
 
                         <!-- CALCULADORA DE UPS -->
-                        <div class="bg-white p-2 border border-slate-200 rounded-lg space-y-2">
+                        <div class="bg-white p-3 border border-slate-200 rounded-lg space-y-2">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" id="include-ups" onchange="toggleUpsType()" class="w-4 h-4 text-blue-600 rounded">
-                                <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir UPS (Respaldo Eléctrico)</span>
+                                <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir UPS (Respaldo)</span>
                             </label>
                             
-                            <div id="ups-calculator-container" class="hidden border-t border-slate-200 pt-2 mt-2 space-y-3">
-                                <div class="grid grid-cols-2 gap-2">
+                            <div id="ups-calculator-container" class="hidden border-t border-slate-200 pt-3 mt-2 space-y-3">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div class="bg-slate-50 p-2 rounded text-center border border-slate-200">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Switch PoE</label>
                                         <select id="ups-switch-ports" onchange="calculateUPS()" class="w-full border-b border-slate-300 outline-none text-center font-bold text-xs bg-transparent pb-1">
@@ -574,13 +594,13 @@
                                     </div>
                                     <div class="bg-slate-50 p-2 rounded text-center border border-slate-200">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Notebooks / NVR</label>
-                                        <input type="number" id="ups-nb-qty" min="0" value="0" oninput="calculateUPS()" class="w-full border-b border-slate-300 outline-none text-center font-bold text-xs bg-transparent">
+                                        <input type="number" id="ups-nb-qty" min="0" value="0" oninput="calculateUPS()" class="w-full border-b border-slate-300 outline-none text-center font-bold text-xs bg-transparent py-1">
                                     </div>
                                 </div>
 
-                                <div class="flex justify-between items-center bg-blue-50 p-2 rounded border border-blue-100">
+                                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 bg-blue-50 p-2.5 rounded border border-blue-100">
                                     <label class="text-[9px] font-bold text-blue-800 uppercase">Autonomía Deseada</label>
-                                    <select id="ups-autonomy" onchange="calculateUPS()" class="p-1 border border-blue-200 rounded text-[9px] font-bold bg-white text-blue-800 outline-none">
+                                    <select id="ups-autonomy" onchange="calculateUPS()" class="p-1.5 w-full sm:w-auto border border-blue-200 rounded text-[9px] font-bold bg-white text-blue-800 outline-none">
                                         <option value="0.25">Corte breve (10-15 min)</option>
                                         <option value="0.5">Media hora (30 min)</option>
                                         <option value="1">1 Hora</option>
@@ -599,9 +619,9 @@
                                     </div>
                                 </div>
                                 
-                                <div>
+                                <div class="pt-1">
                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Selección Final (Para Presupuesto)</label>
-                                    <select id="ups-type" class="w-full p-1 border border-slate-200 rounded text-[10px] font-bold bg-white transition-colors">
+                                    <select id="ups-type" class="w-full p-2 border border-slate-200 rounded text-[10px] font-bold bg-white transition-colors">
                                         <option value="UPS 650VA Interactiva (Torre)">UPS 650VA Interactiva (Torre)</option>
                                         <option value="UPS 800VA Interactiva (Torre)" selected>UPS 800VA Interactiva (Torre)</option>
                                         <option value="UPS 1000VA Interactiva (Torre)">UPS 1000VA Interactiva (Torre)</option>
@@ -615,16 +635,16 @@
                             </div>
                         </div>
 
-                        <button onclick="addRackEnergy()" class="w-full bg-slate-800 text-white p-2 rounded-lg font-bold hover:bg-slate-900 transition text-[10px] uppercase shadow-md">
+                        <button onclick="addRackEnergy()" class="w-full bg-slate-800 text-white p-3 rounded-lg font-bold hover:bg-slate-900 transition text-[10px] uppercase shadow-md active:bg-slate-950">
                             Cargar Sección Rack
                         </button>
                     </div>
                 </section>
 
                 <!-- 4. ENERGÍA -->
-                <section id="sec-tpr" class="section-step bg-emerald-50 rounded-xl border border-emerald-200 p-5 shadow-sm order-4">
+                <section id="sec-tpr" class="section-step bg-emerald-50 rounded-xl border border-emerald-200 p-4 md:p-5 shadow-sm order-4">
                     <h2 class="text-emerald-800 font-black mb-4 uppercase text-[10px] tracking-widest flex items-center gap-2">
-                        <span class="step-number bg-emerald-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">4</span>
+                        <span class="step-number bg-emerald-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">4</span>
                         Cable de Energía 220V - 12V/ 48V
                     </h2>
                     <div class="space-y-4">
@@ -632,9 +652,9 @@
                         <!-- 220V -->
                         <div>
                             <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Fuente de Energía 220V</label>
-                            <div class="grid grid-cols-3 gap-2 mb-2">
-                                <div class="col-span-2">
-                                    <select id="tpr-type" class="w-full p-2 border border-emerald-200 rounded-lg text-xs font-bold bg-white">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+                                <div class="sm:col-span-2">
+                                    <select id="tpr-type" class="w-full p-2.5 border border-emerald-200 rounded-lg text-xs font-bold bg-white">
                                         <option value="2x1 mm²">2 x 1.0 mm²</option>
                                         <option value="2x1.5 mm²">2 x 1.5 mm²</option>
                                         <option value="2x2.5 mm²" selected>2 x 2.5 mm² (Recomendado)</option>
@@ -644,25 +664,25 @@
                                         <option value="3x4 mm²">3 x 4.0 mm² (Con Tierra)</option>
                                     </select>
                                 </div>
-                                <div class="col-span-1">
-                                    <input type="number" id="tpr-meters" min="0" value="0" class="w-full p-2 border border-emerald-200 rounded-lg text-center text-xs font-bold bg-white" placeholder="Mts">
+                                <div class="sm:col-span-1">
+                                    <input type="number" id="tpr-meters" min="0" value="0" class="w-full p-2.5 border border-emerald-200 rounded-lg text-center text-xs font-bold bg-white" placeholder="Mts">
                                 </div>
                             </div>
 
                             <!-- GRUPOS DE TOMAS MODULARES -->
-                            <div class="border-t border-emerald-200 pt-3 mt-2">
+                            <div class="border-t border-emerald-200 pt-3 mt-3">
                                 <label class="block text-[9px] font-bold text-slate-500 uppercase mb-2">Grupos de Tomas de Corriente</label>
                                 <div class="space-y-3">
                                     
                                     <!-- GRUPO 1 -->
-                                    <div class="bg-emerald-50/50 p-2 border border-emerald-100 rounded-lg">
+                                    <div class="bg-emerald-50/50 p-2.5 border border-emerald-100 rounded-lg">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="checkbox" id="include-outlets-1" onchange="toggleOutlets(1)" class="w-4 h-4 text-emerald-600 rounded">
                                             <span class="text-[9px] font-bold text-slate-700 uppercase">Grupo 1 (Incluir Tomas)</span>
                                         </label>
                                         
-                                        <div id="outlets-container-1" data-total-modules="0" class="hidden mt-2 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
-                                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                        <div id="outlets-container-1" data-total-modules="0" class="hidden mt-3 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                                                 <div>
                                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Toma</label>
                                                     <select id="outlet-type-1" onchange="toggleOutletsUI(1)" class="w-full p-2 border border-emerald-200 rounded-lg text-[10px] font-bold bg-white">
@@ -682,15 +702,15 @@
                                             <div id="emb-fields-1" class="space-y-3">
                                                 <div class="grid grid-cols-3 gap-2">
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple (1)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple</label>
                                                         <input type="number" id="emb-qty-1-1" min="0" value="0" oninput="updateTotalModules(1)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble (2)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble</label>
                                                         <input type="number" id="emb-qty-2-1" min="0" value="0" oninput="updateTotalModules(1)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple (3)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple</label>
                                                         <input type="number" id="emb-qty-3-1" min="0" value="0" oninput="updateTotalModules(1)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                 </div>
@@ -744,7 +764,7 @@
 
                                             <div id="emb-box-container-1" class="mt-2">
                                                 <label class="flex items-center gap-2 cursor-pointer bg-emerald-50 p-2 rounded border border-emerald-100">
-                                                    <input type="checkbox" id="emb-include-box-1" class="w-3 h-3 text-emerald-600 rounded">
+                                                    <input type="checkbox" id="emb-include-box-1" class="w-4 h-4 text-emerald-600 rounded">
                                                     <span class="text-[8px] font-bold text-emerald-800 uppercase">Incluir Caja 12x4 Alta p/ Canal</span>
                                                 </label>
                                             </div>
@@ -752,14 +772,14 @@
                                     </div>
 
                                     <!-- GRUPO 2 -->
-                                    <div class="bg-emerald-50/50 p-2 border border-emerald-100 rounded-lg">
+                                    <div class="bg-emerald-50/50 p-2.5 border border-emerald-100 rounded-lg">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="checkbox" id="include-outlets-2" onchange="toggleOutlets(2)" class="w-4 h-4 text-emerald-600 rounded">
                                             <span class="text-[9px] font-bold text-slate-700 uppercase">Grupo 2 (Incluir Tomas)</span>
                                         </label>
                                         
-                                        <div id="outlets-container-2" data-total-modules="0" class="hidden mt-2 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
-                                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                        <div id="outlets-container-2" data-total-modules="0" class="hidden mt-3 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                                                 <div>
                                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Toma</label>
                                                     <select id="outlet-type-2" onchange="toggleOutletsUI(2)" class="w-full p-2 border border-emerald-200 rounded-lg text-[10px] font-bold bg-white">
@@ -779,15 +799,15 @@
                                             <div id="emb-fields-2" class="space-y-3">
                                                 <div class="grid grid-cols-3 gap-2">
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple (1)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple</label>
                                                         <input type="number" id="emb-qty-1-2" min="0" value="0" oninput="updateTotalModules(2)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble (2)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble</label>
                                                         <input type="number" id="emb-qty-2-2" min="0" value="0" oninput="updateTotalModules(2)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple (3)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple</label>
                                                         <input type="number" id="emb-qty-3-2" min="0" value="0" oninput="updateTotalModules(2)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                 </div>
@@ -841,7 +861,7 @@
 
                                             <div id="emb-box-container-2" class="mt-2">
                                                 <label class="flex items-center gap-2 cursor-pointer bg-emerald-50 p-2 rounded border border-emerald-100">
-                                                    <input type="checkbox" id="emb-include-box-2" class="w-3 h-3 text-emerald-600 rounded">
+                                                    <input type="checkbox" id="emb-include-box-2" class="w-4 h-4 text-emerald-600 rounded">
                                                     <span class="text-[8px] font-bold text-emerald-800 uppercase">Incluir Caja 12x4 Alta p/ Canal</span>
                                                 </label>
                                             </div>
@@ -849,14 +869,14 @@
                                     </div>
 
                                     <!-- GRUPO 3 -->
-                                    <div class="bg-emerald-50/50 p-2 border border-emerald-100 rounded-lg">
+                                    <div class="bg-emerald-50/50 p-2.5 border border-emerald-100 rounded-lg">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="checkbox" id="include-outlets-3" onchange="toggleOutlets(3)" class="w-4 h-4 text-emerald-600 rounded">
                                             <span class="text-[9px] font-bold text-slate-700 uppercase">Grupo 3 (Incluir Tomas)</span>
                                         </label>
                                         
-                                        <div id="outlets-container-3" data-total-modules="0" class="hidden mt-2 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
-                                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                        <div id="outlets-container-3" data-total-modules="0" class="hidden mt-3 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                                                 <div>
                                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Toma</label>
                                                     <select id="outlet-type-3" onchange="toggleOutletsUI(3)" class="w-full p-2 border border-emerald-200 rounded-lg text-[10px] font-bold bg-white">
@@ -876,15 +896,15 @@
                                             <div id="emb-fields-3" class="space-y-3">
                                                 <div class="grid grid-cols-3 gap-2">
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple (1)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple</label>
                                                         <input type="number" id="emb-qty-1-3" min="0" value="0" oninput="updateTotalModules(3)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble (2)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble</label>
                                                         <input type="number" id="emb-qty-2-3" min="0" value="0" oninput="updateTotalModules(3)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple (3)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple</label>
                                                         <input type="number" id="emb-qty-3-3" min="0" value="0" oninput="updateTotalModules(3)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                 </div>
@@ -938,7 +958,7 @@
 
                                             <div id="emb-box-container-3" class="mt-2">
                                                 <label class="flex items-center gap-2 cursor-pointer bg-emerald-50 p-2 rounded border border-emerald-100">
-                                                    <input type="checkbox" id="emb-include-box-3" class="w-3 h-3 text-emerald-600 rounded">
+                                                    <input type="checkbox" id="emb-include-box-3" class="w-4 h-4 text-emerald-600 rounded">
                                                     <span class="text-[8px] font-bold text-emerald-800 uppercase">Incluir Caja 12x4 Alta p/ Canal</span>
                                                 </label>
                                             </div>
@@ -946,14 +966,14 @@
                                     </div>
 
                                     <!-- GRUPO 4 -->
-                                    <div class="bg-emerald-50/50 p-2 border border-emerald-100 rounded-lg">
+                                    <div class="bg-emerald-50/50 p-2.5 border border-emerald-100 rounded-lg">
                                         <label class="flex items-center gap-2 cursor-pointer">
                                             <input type="checkbox" id="include-outlets-4" onchange="toggleOutlets(4)" class="w-4 h-4 text-emerald-600 rounded">
                                             <span class="text-[9px] font-bold text-slate-700 uppercase">Grupo 4 (Incluir Tomas)</span>
                                         </label>
                                         
-                                        <div id="outlets-container-4" data-total-modules="0" class="hidden mt-2 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
-                                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                        <div id="outlets-container-4" data-total-modules="0" class="hidden mt-3 bg-white p-3 rounded-lg border border-emerald-100 shadow-inner">
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
                                                 <div>
                                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Toma</label>
                                                     <select id="outlet-type-4" onchange="toggleOutletsUI(4)" class="w-full p-2 border border-emerald-200 rounded-lg text-[10px] font-bold bg-white">
@@ -973,15 +993,15 @@
                                             <div id="emb-fields-4" class="space-y-3">
                                                 <div class="grid grid-cols-3 gap-2">
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple (1)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Simple</label>
                                                         <input type="number" id="emb-qty-1-4" min="0" value="0" oninput="updateTotalModules(4)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble (2)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Doble</label>
                                                         <input type="number" id="emb-qty-2-4" min="0" value="0" oninput="updateTotalModules(4)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                     <div class="bg-slate-50 p-2 border border-emerald-100 rounded-lg text-center shadow-sm">
-                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple (3)</label>
+                                                        <label class="block text-[8px] font-bold text-emerald-600 uppercase mb-1">Triple</label>
                                                         <input type="number" id="emb-qty-3-4" min="0" value="0" oninput="updateTotalModules(4)" class="w-full border-b border-emerald-200 outline-none text-center font-bold text-xs bg-transparent">
                                                     </div>
                                                 </div>
@@ -1035,7 +1055,7 @@
 
                                             <div id="emb-box-container-4" class="mt-2">
                                                 <label class="flex items-center gap-2 cursor-pointer bg-emerald-50 p-2 rounded border border-emerald-100">
-                                                    <input type="checkbox" id="emb-include-box-4" class="w-3 h-3 text-emerald-600 rounded">
+                                                    <input type="checkbox" id="emb-include-box-4" class="w-4 h-4 text-emerald-600 rounded">
                                                     <span class="text-[8px] font-bold text-emerald-800 uppercase">Incluir Caja 12x4 Alta p/ Canal</span>
                                                 </label>
                                             </div>
@@ -1047,14 +1067,14 @@
                         </div>
 
                         <!-- 12V / 48V -->
-                        <div class="border-t border-emerald-200 pt-3 space-y-2 mt-4">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" id="include-low-voltage" onchange="toggleLowVoltage()" class="w-4 h-4 text-emerald-600 rounded">
-                                <span class="text-[9px] font-bold text-slate-500 uppercase">Incluir Energía Baja Tensión (12V/48V)</span>
+                        <div class="border-t border-emerald-200 pt-4 space-y-3 mt-4">
+                            <label class="flex items-center gap-2 cursor-pointer bg-emerald-50 p-3 rounded-lg border border-emerald-200">
+                                <input type="checkbox" id="include-low-voltage" onchange="toggleLowVoltage()" class="w-5 h-5 text-emerald-600 rounded">
+                                <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir Energía Baja Tensión (12V/48V)</span>
                             </label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <div class="col-span-2">
-                                    <select id="low-voltage-type" disabled class="w-full p-2 border border-emerald-200 rounded-lg text-xs font-bold bg-slate-50 transition-colors">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                <div class="sm:col-span-2">
+                                    <select id="low-voltage-type" disabled class="w-full p-2.5 border border-emerald-200 rounded-lg text-xs font-bold bg-slate-50 transition-colors">
                                         <optgroup label="Cable Polarizado">
                                             <option value="Cable Polarizado 2x0.50 mm²">2 x 0.50 mm²</option>
                                             <option value="Cable Polarizado 2x0.75 mm²">2 x 0.75 mm²</option>
@@ -1070,37 +1090,37 @@
                                         </optgroup>
                                     </select>
                                 </div>
-                                <div class="col-span-1">
-                                    <input type="number" id="low-voltage-meters" min="0" value="0" disabled class="w-full p-2 border border-emerald-200 rounded-lg text-center text-xs font-bold bg-slate-50 transition-colors" placeholder="Mts">
+                                <div class="sm:col-span-1">
+                                    <input type="number" id="low-voltage-meters" min="0" value="0" disabled class="w-full p-2.5 border border-emerald-200 rounded-lg text-center text-xs font-bold bg-slate-50 transition-colors" placeholder="Metros">
                                 </div>
                             </div>
                         </div>
 
-                        <button onclick="addEnergy()" class="w-full bg-emerald-600 text-white p-2 rounded-lg font-bold hover:bg-emerald-700 transition text-[10px] uppercase shadow-md mt-4">
+                        <button onclick="addEnergy()" class="w-full bg-emerald-600 text-white p-3 rounded-lg font-bold hover:bg-emerald-700 transition text-[10px] uppercase shadow-md mt-4 active:bg-emerald-800">
                             Cargar Energía
                         </button>
                     </div>
                 </section>
 
                 <!-- 5. CANALIZACIÓN -->
-                <section id="sec-conduit" class="section-step bg-orange-50 rounded-xl border border-orange-200 p-5 shadow-sm order-5">
+                <section id="sec-conduit" class="section-step bg-orange-50 rounded-xl border border-orange-200 p-4 md:p-5 shadow-sm order-5">
                     <h2 class="text-orange-800 font-black mb-4 uppercase text-[10px] tracking-widest flex items-center gap-2">
-                        <span class="step-number bg-orange-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">5</span>
+                        <span class="step-number bg-orange-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">5</span>
                         Canalización y Soportes
                     </h2>
 
                     <div class="space-y-4">
                         
                         <!-- RÍGIDA TRAMO 1 -->
-                        <div class="bg-orange-50/50 p-2 border border-orange-100 rounded-lg">
+                        <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
                             <label class="flex items-center gap-2 cursor-pointer mb-2">
-                                <input type="checkbox" id="include-conduit-1" onchange="toggleConduitSection(1)" class="w-4 h-4 text-orange-600 rounded">
-                                <span class="text-[9px] font-bold text-slate-700 uppercase">Incluir Canalización (Rígida / Soportes) - Tramo 1</span>
+                                <input type="checkbox" id="include-conduit-1" onchange="toggleConduitSection(1)" class="w-4 h-4 text-orange-600 rounded shrink-0">
+                                <span class="text-[9px] md:text-[10px] font-bold text-slate-700 uppercase leading-tight">Incluir Canalización (Rígida / Soportes) - Tramo 1</span>
                             </label>
 
                             <div id="conduit-container-1" class="space-y-3 hidden border-t border-orange-200 pt-3">
-                                <div class="grid grid-cols-12 gap-2">
-                                    <div class="col-span-12 md:col-span-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                                    <div class="sm:col-span-6">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Canalizado</label>
                                         <select id="conduit-type-1" onchange="updateConduitOptions(1)" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
                                             <option value="Caño Conduit PVC">Caño Conduit PVC</option>
@@ -1110,22 +1130,24 @@
                                             <option value="Cable Canal PVC ranurado">Cable Canal PVC ranurado</option>
                                         </select>
                                     </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                        <select id="conduit-size-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <!-- Populated dynamically -->
-                                        </select>
-                                    </div>
-                                    <div id="conduit-color-container-1" class="col-span-6 md:col-span-3 hidden">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
-                                        <select id="conduit-color-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <option value="Naranja">Naranja</option>
-                                            <option value="Gris">Gris</option>
-                                        </select>
+                                    <div class="grid grid-cols-2 gap-2 sm:col-span-6">
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                            <select id="conduit-size-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <!-- Populated dynamically -->
+                                            </select>
+                                        </div>
+                                        <div id="conduit-color-container-1" class="hidden">
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
+                                            <select id="conduit-color-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <option value="Naranja">Naranja</option>
+                                                <option value="Gris">Gris</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div id="clamp-container-1" class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-2 gap-2">
+                                <div id="clamp-container-1" class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div>
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Abrazadera</label>
                                         <select id="clamp-type-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-slate-50">
@@ -1144,7 +1166,7 @@
 
                                 <div class="grid grid-cols-2 gap-3">
                                     <div>
-                                        <label id="conduit-units-label-1" class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Unidades (3m c/u)</label>
+                                        <label id="conduit-units-label-1" class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Unid. (3m c/u)</label>
                                         <input type="number" id="conduit-units-1" data-length="3" min="0" value="0" oninput="calculateConduitMeters(1)" class="w-full p-2 border border-orange-200 rounded-lg text-center font-bold text-xs bg-white" placeholder="0">
                                     </div>
                                     <div>
@@ -1156,15 +1178,15 @@
                         </div>
 
                         <!-- RÍGIDA TRAMO 2 -->
-                        <div class="bg-orange-50/50 p-2 border border-orange-100 rounded-lg">
+                        <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
                             <label class="flex items-center gap-2 cursor-pointer mb-2">
-                                <input type="checkbox" id="include-conduit-2" onchange="toggleConduitSection(2)" class="w-4 h-4 text-orange-600 rounded">
-                                <span class="text-[9px] font-bold text-slate-700 uppercase">Incluir Canalización (Rígida / Soportes) - Tramo 2</span>
+                                <input type="checkbox" id="include-conduit-2" onchange="toggleConduitSection(2)" class="w-4 h-4 text-orange-600 rounded shrink-0">
+                                <span class="text-[9px] md:text-[10px] font-bold text-slate-700 uppercase leading-tight">Incluir Canalización (Rígida / Soportes) - Tramo 2</span>
                             </label>
 
                             <div id="conduit-container-2" class="space-y-3 hidden border-t border-orange-200 pt-3">
-                                <div class="grid grid-cols-12 gap-2">
-                                    <div class="col-span-12 md:col-span-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                                    <div class="sm:col-span-6">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Canalizado</label>
                                         <select id="conduit-type-2" onchange="updateConduitOptions(2)" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
                                             <option value="Caño Conduit PVC">Caño Conduit PVC</option>
@@ -1174,22 +1196,24 @@
                                             <option value="Cable Canal PVC ranurado">Cable Canal PVC ranurado</option>
                                         </select>
                                     </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                        <select id="conduit-size-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <!-- Populated dynamically -->
-                                        </select>
-                                    </div>
-                                    <div id="conduit-color-container-2" class="col-span-6 md:col-span-3 hidden">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
-                                        <select id="conduit-color-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <option value="Naranja">Naranja</option>
-                                            <option value="Gris">Gris</option>
-                                        </select>
+                                    <div class="grid grid-cols-2 gap-2 sm:col-span-6">
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                            <select id="conduit-size-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <!-- Populated dynamically -->
+                                            </select>
+                                        </div>
+                                        <div id="conduit-color-container-2" class="hidden">
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
+                                            <select id="conduit-color-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <option value="Naranja">Naranja</option>
+                                                <option value="Gris">Gris</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div id="clamp-container-2" class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-2 gap-2">
+                                <div id="clamp-container-2" class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div>
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Abrazadera</label>
                                         <select id="clamp-type-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-slate-50">
@@ -1208,7 +1232,7 @@
 
                                 <div class="grid grid-cols-2 gap-3">
                                     <div>
-                                        <label id="conduit-units-label-2" class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Unidades (3m c/u)</label>
+                                        <label id="conduit-units-label-2" class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Unid. (3m c/u)</label>
                                         <input type="number" id="conduit-units-2" data-length="3" min="0" value="0" oninput="calculateConduitMeters(2)" class="w-full p-2 border border-orange-200 rounded-lg text-center font-bold text-xs bg-white" placeholder="0">
                                     </div>
                                     <div>
@@ -1220,40 +1244,42 @@
                         </div>
 
                         <!-- FLEXIBLE TRAMO 1 -->
-                        <div class="bg-orange-50/50 p-2 border border-orange-100 rounded-lg">
+                        <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
                             <label class="flex items-center gap-2 cursor-pointer mb-2">
-                                <input type="checkbox" id="include-flex-conduit-1" onchange="toggleFlexConduitSection(1)" class="w-4 h-4 text-orange-600 rounded">
-                                <span class="text-[9px] font-bold text-slate-700 uppercase">Incluir Canalización Flexible - Tramo 1</span>
+                                <input type="checkbox" id="include-flex-conduit-1" onchange="toggleFlexConduitSection(1)" class="w-4 h-4 text-orange-600 rounded shrink-0">
+                                <span class="text-[9px] md:text-[10px] font-bold text-slate-700 uppercase leading-tight">Incluir Canalización Flexible - Tramo 1</span>
                             </label>
 
                             <div id="flex-conduit-container-1" class="space-y-3 hidden border-t border-orange-200 pt-3">
-                                <div class="grid grid-cols-12 gap-2">
-                                    <div class="col-span-12 md:col-span-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                                    <div class="sm:col-span-6">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Canalizado</label>
                                         <select id="flex-conduit-type-1" onchange="updateFlexConduitOptions(1)" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
                                             <option value="Caño Corrugado PVC">Caño Corrugado PVC</option>
                                             <option value="Caño Corrugado Metálico">Caño Corrugado Metálico Flexible</option>
                                         </select>
                                     </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                        <select id="flex-conduit-size-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <option value="16mm">16mm</option>
-                                            <option value="20mm" selected>20mm</option>
-                                            <option value="25mm">25mm</option>
-                                            <option value="32mm">32mm</option>
-                                            <option value="50mm">50mm</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
-                                        <select id="flex-conduit-color-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <!-- Populated dynamically -->
-                                        </select>
+                                    <div class="grid grid-cols-2 gap-2 sm:col-span-6">
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                            <select id="flex-conduit-size-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <option value="16mm">16mm</option>
+                                                <option value="20mm" selected>20mm</option>
+                                                <option value="25mm">25mm</option>
+                                                <option value="32mm">32mm</option>
+                                                <option value="50mm">50mm</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
+                                            <select id="flex-conduit-color-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <!-- Populated dynamically -->
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-2 gap-2">
+                                <div class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div>
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Abrazadera</label>
                                         <select id="flex-clamp-type-1" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-slate-50">
@@ -1278,40 +1304,42 @@
                         </div>
 
                         <!-- FLEXIBLE TRAMO 2 -->
-                        <div class="bg-orange-50/50 p-2 border border-orange-100 rounded-lg">
+                        <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
                             <label class="flex items-center gap-2 cursor-pointer mb-2">
-                                <input type="checkbox" id="include-flex-conduit-2" onchange="toggleFlexConduitSection(2)" class="w-4 h-4 text-orange-600 rounded">
-                                <span class="text-[9px] font-bold text-slate-700 uppercase">Incluir Canalización Flexible - Tramo 2</span>
+                                <input type="checkbox" id="include-flex-conduit-2" onchange="toggleFlexConduitSection(2)" class="w-4 h-4 text-orange-600 rounded shrink-0">
+                                <span class="text-[9px] md:text-[10px] font-bold text-slate-700 uppercase leading-tight">Incluir Canalización Flexible - Tramo 2</span>
                             </label>
 
                             <div id="flex-conduit-container-2" class="space-y-3 hidden border-t border-orange-200 pt-3">
-                                <div class="grid grid-cols-12 gap-2">
-                                    <div class="col-span-12 md:col-span-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                                    <div class="sm:col-span-6">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Canalizado</label>
                                         <select id="flex-conduit-type-2" onchange="updateFlexConduitOptions(2)" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
                                             <option value="Caño Corrugado PVC">Caño Corrugado PVC</option>
                                             <option value="Caño Corrugado Metálico">Caño Corrugado Metálico Flexible</option>
                                         </select>
                                     </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                        <select id="flex-conduit-size-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <option value="16mm">16mm</option>
-                                            <option value="20mm" selected>20mm</option>
-                                            <option value="25mm">25mm</option>
-                                            <option value="32mm">32mm</option>
-                                            <option value="50mm">50mm</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
-                                        <select id="flex-conduit-color-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <!-- Populated dynamically -->
-                                        </select>
+                                    <div class="grid grid-cols-2 gap-2 sm:col-span-6">
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                            <select id="flex-conduit-size-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <option value="16mm">16mm</option>
+                                                <option value="20mm" selected>20mm</option>
+                                                <option value="25mm">25mm</option>
+                                                <option value="32mm">32mm</option>
+                                                <option value="50mm">50mm</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
+                                            <select id="flex-conduit-color-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <!-- Populated dynamically -->
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-2 gap-2">
+                                <div class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div>
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Abrazadera</label>
                                         <select id="flex-clamp-type-2" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-slate-50">
@@ -1336,15 +1364,15 @@
                         </div>
 
                         <!-- CAJAS DE PASO -->
-                        <div class="bg-orange-50/50 p-2 border border-orange-100 rounded-lg">
+                        <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
                             <label class="flex items-center gap-2 cursor-pointer mb-2">
-                                <input type="checkbox" id="include-junction-box" onchange="toggleJunctionBoxSection()" class="w-4 h-4 text-orange-600 rounded">
-                                <span class="text-[9px] font-bold text-slate-700 uppercase">Incluir Cajas de Paso</span>
+                                <input type="checkbox" id="include-junction-box" onchange="toggleJunctionBoxSection()" class="w-4 h-4 text-orange-600 rounded shrink-0">
+                                <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir Cajas de Paso</span>
                             </label>
 
                             <div id="junction-box-container" class="space-y-3 hidden border-t border-orange-200 pt-3">
-                                <div class="grid grid-cols-12 gap-2">
-                                    <div class="col-span-12 md:col-span-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                                    <div class="sm:col-span-12">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Caja de Paso</label>
                                         <select id="junction-box-type" onchange="updateJunctionBoxOptions()" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
                                             <option value="CAJA DE PASO PLÁSTICA CUADRADA/RECTANGULAR CON GOMA">Caja Plástica Cuadrada/Rect. con Goma</option>
@@ -1356,17 +1384,19 @@
                                             <option value="CAJA DE PASE METÁLICA OCTAGONAL">Caja de Pase Metálica Octagonal</option>
                                         </select>
                                     </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                        <select id="junction-box-size" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <!-- Populated dynamically -->
-                                        </select>
-                                    </div>
-                                    <div class="col-span-6 md:col-span-3">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
-                                        <select id="junction-box-color" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <!-- Populated dynamically -->
-                                        </select>
+                                    <div class="grid grid-cols-2 gap-2 sm:col-span-12">
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                            <select id="junction-box-size" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <!-- Populated dynamically -->
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Color</label>
+                                            <select id="junction-box-color" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
+                                                <!-- Populated dynamically -->
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -1387,26 +1417,28 @@
                                 <!-- CONTENEDOR CONECTORES (CAJA/CAÑO) -->
                                 <div id="junction-connectors-container" class="mt-3 p-3 bg-white border border-orange-200 rounded-lg shadow-sm">
                                     <label class="block text-[9px] font-black text-orange-600 uppercase mb-2">Conexión Caja / Caño (Terminaciones)</label>
-                                    <div class="grid grid-cols-12 gap-2">
-                                        <div class="col-span-12 md:col-span-6">
+                                    <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                                        <div class="sm:col-span-12 md:col-span-6">
                                             <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Conector</label>
                                             <select id="junction-connector-type" class="w-full p-2 border border-orange-200 rounded-lg text-[9px] font-bold bg-slate-50">
                                                 <!-- Populated dynamically -->
                                             </select>
                                         </div>
-                                        <div class="col-span-6 md:col-span-3">
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                            <select id="junction-connector-size" class="w-full p-2 border border-orange-200 rounded-lg text-[9px] font-bold bg-slate-50">
-                                                <option value="16mm">16mm</option>
-                                                <option value="20mm">20mm</option>
-                                                <option value="25mm">25mm</option>
-                                                <option value="32mm">32mm</option>
-                                                <option value="50mm">50mm</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-span-6 md:col-span-3">
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Conect.</label>
-                                            <input type="number" id="junction-connector-qty" min="0" value="0" class="w-full p-2 border border-orange-200 rounded-lg text-center font-bold text-xs bg-white" placeholder="0">
+                                        <div class="grid grid-cols-2 gap-2 sm:col-span-12 md:col-span-6">
+                                            <div>
+                                                <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                                <select id="junction-connector-size" class="w-full p-2 border border-orange-200 rounded-lg text-[9px] font-bold bg-slate-50">
+                                                    <option value="16mm">16mm</option>
+                                                    <option value="20mm">20mm</option>
+                                                    <option value="25mm">25mm</option>
+                                                    <option value="32mm">32mm</option>
+                                                    <option value="50mm">50mm</option>
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Conect.</label>
+                                                <input type="number" id="junction-connector-qty" min="0" value="0" class="w-full p-2 border border-orange-200 rounded-lg text-center font-bold text-xs bg-white" placeholder="0">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1415,44 +1447,44 @@
 
                     </div>
 
-                    <button onclick="addConduit()" class="w-full bg-orange-600 text-white p-2 rounded-lg font-bold hover:bg-orange-700 transition text-[10px] uppercase shadow-md mt-4">
+                    <button onclick="addConduit()" class="w-full bg-orange-600 text-white p-3 rounded-lg font-bold hover:bg-orange-700 transition text-[10px] uppercase shadow-md mt-4 active:bg-orange-800">
                         Cargar Canalizaciones y Cajas
                     </button>
                 </section>
 
                 <!-- 6. FIJACIONES Y TORNILLERIA -->
-                <section id="sec-fijaciones" class="section-step bg-red-50 rounded-xl border border-red-200 p-5 shadow-sm col-span-1 md:col-span-2 border-dashed border-2 order-6">
-                    <div class="flex justify-between items-start mb-4">
+                <section id="sec-fijaciones" class="section-step bg-red-50 rounded-xl border border-red-200 p-4 md:p-5 shadow-sm col-span-1 lg:col-span-2 border-dashed border-2 order-6">
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
                         <h2 class="text-red-800 font-black uppercase text-[10px] tracking-widest flex items-center gap-2">
-                            <span class="step-number bg-red-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">6</span>
+                            <span class="step-number bg-red-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">6</span>
                             Cálculo Automático de Fijaciones
                         </h2>
                     </div>
                     
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                         <div class="bg-white p-3 rounded-lg border border-red-100 shadow-sm flex flex-col items-center">
-                            <span class="text-[9px] font-bold text-slate-400 uppercase text-center">Puntos (Cajas/Placas)</span>
-                            <span id="f-cajas-count" class="text-xl font-black text-red-600">0</span>
+                            <span class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase text-center leading-tight">Puntos<br>(Cajas/Placas)</span>
+                            <span id="f-cajas-count" class="text-xl font-black text-red-600 mt-1">0</span>
                         </div>
                         <div class="bg-white p-3 rounded-lg border border-red-100 shadow-sm flex flex-col items-center">
-                            <span class="text-[9px] font-bold text-slate-400 uppercase">Abrazaderas</span>
-                            <span id="f-abrazaderas-count" class="text-xl font-black text-red-600">0</span>
+                            <span class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase text-center leading-tight"><br>Abrazaderas</span>
+                            <span id="f-abrazaderas-count" class="text-xl font-black text-red-600 mt-1">0</span>
                         </div>
                         <div class="bg-white p-3 rounded-lg border border-red-100 shadow-sm flex flex-col items-center">
-                            <span class="text-[9px] font-bold text-slate-500 uppercase font-black text-center">Tornillo + Tarugo 8mm</span>
-                            <span id="f-tornillos-mamposteria" class="text-2xl font-black text-slate-800">0</span>
+                            <span class="text-[8px] md:text-[9px] font-bold text-slate-500 uppercase font-black text-center leading-tight">Tornillo + Tarugo<br>8mm</span>
+                            <span id="f-tornillos-mamposteria" class="text-2xl font-black text-slate-800 mt-1">0</span>
                         </div>
                         <div class="bg-white p-3 rounded-lg border border-red-100 shadow-sm flex flex-col items-center">
-                            <span class="text-[9px] font-bold text-slate-500 uppercase font-black text-center">Tornillo Autoperf.</span>
-                            <span id="f-tornillos-metal" class="text-2xl font-black text-slate-800">0</span>
+                            <span class="text-[8px] md:text-[9px] font-bold text-slate-500 uppercase font-black text-center leading-tight">Tornillo<br>Autoperf.</span>
+                            <span id="f-tornillos-metal" class="text-2xl font-black text-slate-800 mt-1">0</span>
                         </div>
                     </div>
 
-                    <div class="flex gap-2">
-                        <button onclick="refreshFijacionesInfo()" class="flex-1 bg-white border border-red-300 text-red-600 p-2 rounded-lg font-bold hover:bg-red-50 transition text-[10px] uppercase shadow-sm">
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button onclick="refreshFijacionesInfo()" class="flex-1 bg-white border border-red-300 text-red-600 p-3 rounded-lg font-bold hover:bg-red-50 transition text-[10px] uppercase shadow-sm">
                             Recalcular Datos
                         </button>
-                        <button onclick="addFijacionesToTable()" class="flex-[2] bg-red-600 text-white p-2 rounded-lg font-bold hover:bg-red-700 transition text-[10px] uppercase shadow-md flex items-center justify-center gap-2">
+                        <button onclick="addFijacionesToTable()" class="flex-[2] bg-red-600 text-white p-3 rounded-lg font-bold hover:bg-red-700 transition text-[10px] uppercase shadow-md flex items-center justify-center gap-2 active:bg-red-800">
                             Actualizar Fijaciones en Presupuesto
                         </button>
                     </div>
@@ -1462,10 +1494,10 @@
 
             <!-- Tabla de Resultados -->
             <section class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden mb-6">
-                <div class="p-4 bg-slate-800 text-white flex justify-between items-center no-print">
-                    <h2 class="font-bold uppercase text-xs tracking-widest">Lista de Materiales Relevados</h2>
-                    <div class="flex gap-2">
-                        <select id="currency-selector" onchange="changeCurrency()" class="text-slate-800 text-[10px] font-bold px-2 py-1 rounded outline-none cursor-pointer">
+                <div class="p-3 md:p-4 bg-slate-800 text-white flex flex-col sm:flex-row justify-between sm:items-center gap-3 no-print">
+                    <h2 class="font-bold uppercase text-xs tracking-widest text-center sm:text-left">Lista de Materiales Relevados</h2>
+                    <div class="flex justify-between sm:justify-end gap-2 w-full sm:w-auto">
+                        <select id="currency-selector" onchange="changeCurrency()" class="text-slate-800 text-[10px] font-bold px-2 py-1.5 rounded outline-none cursor-pointer flex-1 sm:flex-none">
                             <option value="USD">USD ($) - Dólar US</option>
                             <option value="EUR">EUR (€) - Euro</option>
                             <option value="PYG">PYG (Gs.) - Guaraní PY</option>
@@ -1476,39 +1508,39 @@
                             <option value="PEN">PEN (S/) - Sol PE</option>
                             <option value="BRL">BRL (R$) - Real BR</option>
                         </select>
-                        <button onclick="manualAddItem()" class="bg-blue-500 text-white px-3 py-1 rounded text-[10px] font-bold hover:bg-blue-400 uppercase tracking-tighter shadow-sm">+ Item Manual</button>
+                        <button onclick="manualAddItem()" class="bg-blue-500 text-white px-3 py-1.5 rounded text-[10px] font-bold hover:bg-blue-400 uppercase tracking-tighter shadow-sm shrink-0">+ Item Manual</button>
                     </div>
                 </div>
                 <div class="p-4 bg-slate-800 text-white flex justify-between items-center print-only">
                     <h2 class="font-bold uppercase text-xl tracking-widest text-center w-full">Lista de Materiales Relevados</h2>
                 </div>
                 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
+                <div class="overflow-x-auto pb-2">
+                    <table class="w-full text-left min-w-[600px]">
                         <thead>
                             <tr class="bg-slate-100 text-slate-500 text-[10px] uppercase tracking-wider font-bold border-b border-slate-200">
-                                <th class="px-4 py-3">Descripción del Material</th>
-                                <th class="px-4 py-3 text-center w-24">Cant.</th>
-                                <th class="px-4 py-3 text-center w-24">Unidad</th>
-                                <th id="th-price" class="px-4 py-3 text-right w-32">P. Unit. ($)</th>
-                                <th id="th-subtotal" class="px-4 py-3 text-right w-32">Subtotal ($)</th>
-                                <th class="px-4 py-3 text-right no-print w-10"></th>
+                                <th class="px-3 py-3 md:px-4">Descripción del Material</th>
+                                <th class="px-2 py-3 md:px-4 text-center w-16 md:w-24">Cant.</th>
+                                <th class="px-2 py-3 md:px-4 text-center w-16 md:w-24">Unid.</th>
+                                <th id="th-price" class="px-3 py-3 md:px-4 text-right w-24 md:w-32">P. Unit. ($)</th>
+                                <th id="th-subtotal" class="px-3 py-3 md:px-4 text-right w-24 md:w-32">Subtotal ($)</th>
+                                <th class="px-2 py-3 md:px-4 text-right no-print w-10"></th>
                             </tr>
                         </thead>
                         <tbody id="items-body"></tbody>
                     </table>
                 </div>
-                <div class="p-6 bg-slate-50 border-t flex flex-col items-end">
-                    <div class="w-full md:w-80 space-y-2 text-sm">
+                <div class="p-4 md:p-6 bg-slate-50 border-t flex flex-col items-center sm:items-end">
+                    <div class="w-full sm:w-80 space-y-2 text-sm">
                         <div class="flex justify-between text-slate-600 font-bold">
                             <span>Subtotal de Materiales:</span>
                             <span id="summary-subtotal" class="font-mono">$ 0.00</span>
                         </div>
                         <div class="flex justify-between items-center no-print">
                             <span class="text-slate-600 font-bold">IVA / Impuestos (%):</span>
-                            <input type="number" id="tax-input" value="10" oninput="updateTotals()" class="w-16 text-right border border-slate-300 rounded px-1 font-bold">
+                            <input type="number" id="tax-input" value="10" oninput="updateTotals()" class="w-16 text-right border border-slate-300 rounded px-2 py-1 font-bold">
                         </div>
-                        <div class="flex justify-between text-xl font-black text-slate-900 pt-3 border-t-2 border-slate-300">
+                        <div class="flex justify-between text-lg md:text-xl font-black text-slate-900 pt-3 border-t-2 border-slate-300">
                             <span>TOTAL EST.:</span>
                             <span id="summary-total" class="font-mono text-blue-700">$ 0.00</span>
                         </div>
@@ -1516,8 +1548,8 @@
                 </div>
             </section>
 
-            <section class="bg-white rounded-xl border border-slate-200 p-5 mb-10">
-                <h3 class="text-[10px] font-black uppercase text-slate-400 mb-2 italic no-print">Notas Técnicas y Observaciones</h3>
+            <section class="bg-white rounded-xl border border-slate-200 p-4 md:p-5 mb-10">
+                <h3 class="text-[10px] font-black uppercase text-slate-400 mb-2 italic print:text-black print:text-sm">Notas Técnicas y Observaciones</h3>
                 <textarea id="obs-field" class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg min-h-[100px] text-sm italic" placeholder="Ingrese detalles específicos del montaje o del entorno..."></textarea>
             </section>
 
@@ -1537,15 +1569,34 @@
                 document.getElementById('view-module-redes').classList.remove('hidden');
                 
                 // Mostrar botones de cabecera
-                document.getElementById('btn-back').classList.remove('hidden');
-                document.getElementById('header-actions').classList.remove('hidden');
-                document.getElementById('construction-alert').classList.add('hidden');
+                const btnBack = document.getElementById('btn-back');
+                if(btnBack) {
+                    btnBack.classList.remove('hidden');
+                    btnBack.classList.add('flex');
+                }
+                
+                const headerActions = document.getElementById('header-actions');
+                if(headerActions) {
+                    headerActions.classList.remove('hidden');
+                    headerActions.classList.add('flex');
+                }
+                
+                const alertBox = document.getElementById('construction-alert');
+                if(alertBox) {
+                    alertBox.classList.add('hidden');
+                    alertBox.classList.remove('flex');
+                }
             } else {
                 // Muestra alerta para los módulos en construcción
-                document.getElementById('construction-alert').classList.remove('hidden');
-                setTimeout(() => {
-                    document.getElementById('construction-alert').classList.add('hidden');
-                }, 3000);
+                const alertBox = document.getElementById('construction-alert');
+                if(alertBox) {
+                    alertBox.classList.remove('hidden');
+                    alertBox.classList.add('flex');
+                    setTimeout(() => {
+                        alertBox.classList.add('hidden');
+                        alertBox.classList.remove('flex');
+                    }, 3000);
+                }
             }
         }
 
@@ -1554,8 +1605,17 @@
             document.getElementById('view-home').style.display = 'block';
             
             // Ocultar botones de cabecera
-            document.getElementById('btn-back').classList.add('hidden');
-            document.getElementById('header-actions').classList.add('hidden');
+            const btnBack = document.getElementById('btn-back');
+            if(btnBack) {
+                btnBack.classList.add('hidden');
+                btnBack.classList.remove('flex');
+            }
+            
+            const headerActions = document.getElementById('header-actions');
+            if(headerActions) {
+                headerActions.classList.add('hidden');
+                headerActions.classList.remove('flex');
+            }
         }
 
 
@@ -1581,16 +1641,23 @@
         }
 
         function changeCurrency() {
-            currentCurrency = document.getElementById('currency-selector').value;
+            const selector = document.getElementById('currency-selector');
+            if(!selector) return;
+            currentCurrency = selector.value;
             const curr = currencies[currentCurrency];
-            document.getElementById('th-price').innerText = `P. Unit. (${curr.symbol})`;
-            document.getElementById('th-subtotal').innerText = `Subtotal (${curr.symbol})`;
+            const thPrice = document.getElementById('th-price');
+            const thSubtotal = document.getElementById('th-subtotal');
+            if(thPrice) thPrice.innerText = `P. Unit. (${curr.symbol})`;
+            if(thSubtotal) thSubtotal.innerText = `Subtotal (${curr.symbol})`;
             renderTable();
         }
 
         function updateCableTypes() {
-            const cat = document.getElementById('cable-cat').value;
+            const catEl = document.getElementById('cable-cat');
+            if(!catEl) return;
+            const cat = catEl.value;
             const envSelect = document.getElementById('cable-env');
+            if(!envSelect) return;
             envSelect.innerHTML = ''; 
 
             let options = [];
@@ -1674,7 +1741,8 @@
         }
 
         function calculateStorage() {
-            const retentionDays = parseInt(document.getElementById('storage-retention').value) || 30;
+            const storageRetentionEl = document.getElementById('storage-retention');
+            const retentionDays = storageRetentionEl ? (parseInt(storageRetentionEl.value) || 30) : 30;
             let totalBitrateKbps = 0;
 
             for (let i = 1; i <= 5; i++) {
@@ -1694,18 +1762,24 @@
             const displayCalc = document.getElementById('storage-calculated');
             const displayRec = document.getElementById('storage-recommended');
 
-            if (totalTB > 0) {
-                displayCalc.innerText = totalTB.toFixed(2) + ' TB';
-                displayRec.innerText = getCommercialHDD(totalTB) + ' TB';
-            } else {
-                displayCalc.innerText = '0.00 TB';
-                displayRec.innerText = '0 TB';
+            if (displayCalc && displayRec) {
+                if (totalTB > 0) {
+                    displayCalc.innerText = totalTB.toFixed(2) + ' TB';
+                    displayRec.innerText = getCommercialHDD(totalTB) + ' TB';
+                } else {
+                    displayCalc.innerText = '0.00 TB';
+                    displayRec.innerText = '0 TB';
+                }
             }
         }
 
         function updateCameraOptions() {
-            const brand = document.getElementById('cctv-brand').value;
-            const tech = document.getElementById('tech-type').value;
+            const brandEl = document.getElementById('cctv-brand');
+            const techEl = document.getElementById('tech-type');
+            if(!brandEl || !techEl) return;
+            
+            const brand = brandEl.value;
+            const tech = techEl.value;
 
             let types = [];
             let mps = [];
@@ -1761,7 +1835,10 @@
         }
 
         function toggleTechMode() {
-            const tech = document.getElementById('tech-type').value;
+            const techEl = document.getElementById('tech-type');
+            if(!techEl) return;
+            const tech = techEl.value;
+            
             const cctvFields = document.getElementById('cctv-fields');
             const netFields = document.getElementById('net-fields');
             const secData = document.getElementById('sec-networking-data');
@@ -1777,13 +1854,13 @@
             ];
 
             if (tech === 'networking') {
-                cctvFields.classList.add('hidden');
-                netFields.classList.remove('hidden');
-                secData.classList.remove('hidden');
+                if(cctvFields) cctvFields.classList.add('hidden');
+                if(netFields) netFields.classList.remove('hidden');
+                if(secData) secData.classList.remove('hidden');
             } else {
-                cctvFields.classList.remove('hidden');
-                netFields.classList.add('hidden');
-                secData.classList.add('hidden');
+                if(cctvFields) cctvFields.classList.remove('hidden');
+                if(netFields) netFields.classList.add('hidden');
+                if(secData) secData.classList.add('hidden');
 
                 if (brandSelect) {
                     const prevBrand = brandSelect.value;
@@ -1808,7 +1885,7 @@
 
             let count = 1;
             sections.forEach(sec => {
-                if (!sec.classList.contains('hidden')) {
+                if (sec && !sec.classList.contains('hidden')) {
                     const stepNum = sec.querySelector('.step-number');
                     if (stepNum) stepNum.innerText = count++;
                 }
@@ -1818,12 +1895,16 @@
         }
 
         function toggleAPLogic() {
-            const qty = parseInt(document.getElementById('ap-count').value) || 0;
+            const apCountEl = document.getElementById('ap-count');
+            if(!apCountEl) return;
+            const qty = parseInt(apCountEl.value) || 0;
             const container = document.getElementById('ap-logic-container');
-            if (qty > 0) {
-                container.classList.remove('hidden');
-            } else {
-                container.classList.add('hidden');
+            if(container) {
+                if (qty > 0) {
+                    container.classList.remove('hidden');
+                } else {
+                    container.classList.add('hidden');
+                }
             }
         }
 
@@ -1917,7 +1998,9 @@
             const id = type === 'keystone' ? 'keystone-qty' : 'surface-box-qty';
             const check = type === 'keystone' ? 'include-keystone' : 'include-surface-box';
             const qtyInput = document.getElementById(id);
-            const isChecked = document.getElementById(check).checked;
+            const checkInput = document.getElementById(check);
+            if(!checkInput) return;
+            const isChecked = checkInput.checked;
             if (qtyInput) {
                 qtyInput.disabled = !isChecked;
                 qtyInput.classList.toggle('bg-white', isChecked);
@@ -1927,13 +2010,20 @@
         }
 
         function addNetworkingDetails() {
-            const qtySimple = parseInt(document.getElementById('rj45-qty-1').value) || 0;
-            const qtyDoble = parseInt(document.getElementById('rj45-qty-2').value) || 0;
-            const qtyQuad = parseInt(document.getElementById('rj45-qty-4').value) || 0;
+            const plate1 = document.getElementById('rj45-qty-1');
+            const plate2 = document.getElementById('rj45-qty-2');
+            const plate4 = document.getElementById('rj45-qty-4');
+            const qtySimple = plate1 ? (parseInt(plate1.value) || 0) : 0;
+            const qtyDoble = plate2 ? (parseInt(plate2.value) || 0) : 0;
+            const qtyQuad = plate4 ? (parseInt(plate4.value) || 0) : 0;
             
-            const keystoneQty = parseInt(document.getElementById('keystone-qty').value) || 0;
-            const boxQty = parseInt(document.getElementById('surface-box-qty').value) || 0;
-            const keystoneShield = document.getElementById('keystone-shield').value;
+            const kQtyEl = document.getElementById('keystone-qty');
+            const boxQtyEl = document.getElementById('surface-box-qty');
+            const keystoneQty = kQtyEl ? (parseInt(kQtyEl.value) || 0) : 0;
+            const boxQty = boxQtyEl ? (parseInt(boxQtyEl.value) || 0) : 0;
+            
+            const shieldEl = document.getElementById('keystone-shield');
+            const keystoneShield = shieldEl ? shieldEl.value : 'Sin Blindaje';
 
             if (qtySimple > 0) pushConsolidated(`Placa de Pared Red Simple (1 Boca)`, qtySimple, 'un', 0, 'Mampostería');
             if (qtyDoble > 0) pushConsolidated(`Placa de Pared Red Doble (2 Bocas)`, qtyDoble, 'un', 0, 'Mampostería');
@@ -1948,9 +2038,9 @@
 
             renderTable();
             
-            document.getElementById('rj45-qty-1').value = 0;
-            document.getElementById('rj45-qty-2').value = 0;
-            document.getElementById('rj45-qty-4').value = 0;
+            if(plate1) plate1.value = 0;
+            if(plate2) plate2.value = 0;
+            if(plate4) plate4.value = 0;
             autoCalculateNetworking();
         }
 
@@ -2049,9 +2139,13 @@
         }
 
         function calculateUPS() {
-            const switchPorts = parseInt(document.getElementById('ups-switch-ports').value) || 0;
-            const nbs = parseInt(document.getElementById('ups-nb-qty').value) || 0;
-            const autonomy = parseFloat(document.getElementById('ups-autonomy').value) || 0.25;
+            const switchEl = document.getElementById('ups-switch-ports');
+            const nbEl = document.getElementById('ups-nb-qty');
+            const autoEl = document.getElementById('ups-autonomy');
+            
+            const switchPorts = switchEl ? (parseInt(switchEl.value) || 0) : 0;
+            const nbs = nbEl ? (parseInt(nbEl.value) || 0) : 0;
+            const autonomy = autoEl ? (parseFloat(autoEl.value) || 0.25) : 0.25;
             
             let baseLoadVA = (switchPorts * 20) + (nbs * 100);
             
@@ -2062,11 +2156,14 @@
             
             let requiredVA = baseLoadVA * multiplier;
             
-            document.getElementById('ups-load-calc').innerText = baseLoadVA + ' VA';
+            const loadCalcEl = document.getElementById('ups-load-calc');
+            if(loadCalcEl) loadCalcEl.innerText = baseLoadVA + ' VA';
             
             const recDisplay = document.getElementById('ups-rec-calc');
             const upsSelect = document.getElementById('ups-type');
             
+            if(!recDisplay || !upsSelect) return;
+
             if (baseLoadVA === 0) {
                 recDisplay.innerText = 'Ninguno';
                 return;
@@ -2191,9 +2288,12 @@
             let total = 0;
 
             if (outletType === 'Embutir') {
-                const out1 = parseInt(document.getElementById(`emb-qty-1-${i}`).value) || 0;
-                const out2 = parseInt(document.getElementById(`emb-qty-2-${i}`).value) || 0;
-                const out3 = parseInt(document.getElementById(`emb-qty-3-${i}`).value) || 0;
+                const out1El = document.getElementById(`emb-qty-1-${i}`);
+                const out2El = document.getElementById(`emb-qty-2-${i}`);
+                const out3El = document.getElementById(`emb-qty-3-${i}`);
+                const out1 = out1El ? (parseInt(out1El.value) || 0) : 0;
+                const out2 = out2El ? (parseInt(out2El.value) || 0) : 0;
+                const out3 = out3El ? (parseInt(out3El.value) || 0) : 0;
                 total = (out1 * 1) + (out2 * 2) + (out3 * 3);
             } else {
                 for (let j = 1; j <= 6; j++) {
@@ -2268,13 +2368,26 @@
         }
 
         function addRackEnergy() {
-            const rackU = parseInt(document.getElementById('rack-size').value);
-            const includeTray = document.getElementById('include-tray').checked;
-            const trayQty = parseInt(document.getElementById('tray-qty').value) || 1;
-            const useUps = document.getElementById('include-ups').checked;
-            const upsType = document.getElementById('ups-type').value;
-            const usePatchPanel = document.getElementById('include-patchpanel').checked;
-            const patchPanelPorts = document.getElementById('patchpanel-type').value;
+            const rSizeEl = document.getElementById('rack-size');
+            const rackU = rSizeEl ? parseInt(rSizeEl.value) : 0;
+            
+            const trayCheckEl = document.getElementById('include-tray');
+            const includeTray = trayCheckEl ? trayCheckEl.checked : false;
+            
+            const trayQtyEl = document.getElementById('tray-qty');
+            const trayQty = trayQtyEl ? (parseInt(trayQtyEl.value) || 1) : 1;
+            
+            const upsCheckEl = document.getElementById('include-ups');
+            const useUps = upsCheckEl ? upsCheckEl.checked : false;
+            
+            const upsTypeEl = document.getElementById('ups-type');
+            const upsType = upsTypeEl ? upsTypeEl.value : '';
+            
+            const patchCheckEl = document.getElementById('include-patchpanel');
+            const usePatchPanel = patchCheckEl ? patchCheckEl.checked : false;
+            
+            const patchTypeEl = document.getElementById('patchpanel-type');
+            const patchPanelPorts = patchTypeEl ? patchTypeEl.value : '';
 
             if (rackU > 0) {
                 pushConsolidated(`Rack Mural de ${rackU}U Estándar`, 1, 'un', 0);
@@ -2287,17 +2400,22 @@
                 pushConsolidated(`Patch Panel ${patchPanelPorts} Puertos Cat6`, ppQty, 'un', 0);
             }
             
-            if (useUps) pushConsolidated(upsType, 1, 'un', 0);
+            if (useUps && upsType !== '') pushConsolidated(upsType, 1, 'un', 0);
             renderTable();
         }
 
         function addEnergy() {
-            const type220 = document.getElementById('tpr-type').value;
-            const meters220 = parseFloat(document.getElementById('tpr-meters').value) || 0;
+            const tprTypeEl = document.getElementById('tpr-type');
+            const tprMetersEl = document.getElementById('tpr-meters');
+            const type220 = tprTypeEl ? tprTypeEl.value : '';
+            const meters220 = tprMetersEl ? (parseFloat(tprMetersEl.value) || 0) : 0;
             
-            const includeLowVoltage = document.getElementById('include-low-voltage').checked;
-            const typeLow = document.getElementById('low-voltage-type').value;
-            const metersLow = parseFloat(document.getElementById('low-voltage-meters').value) || 0;
+            const lvCheckEl = document.getElementById('include-low-voltage');
+            const lvTypeEl = document.getElementById('low-voltage-type');
+            const lvMetersEl = document.getElementById('low-voltage-meters');
+            const includeLowVoltage = lvCheckEl ? lvCheckEl.checked : false;
+            const typeLow = lvTypeEl ? lvTypeEl.value : '';
+            const metersLow = lvMetersEl ? (parseFloat(lvMetersEl.value) || 0) : 0;
 
             if (meters220 > 0) pushConsolidated(`Cable de Energía 220V TPR ${type220}`, meters220, 'm', 0);
             
@@ -2305,15 +2423,22 @@
                 const includeOutlets = document.getElementById(`include-outlets-${i}`);
                 
                 if (includeOutlets && includeOutlets.checked) {
-                    const outletType = document.getElementById(`outlet-type-${i}`).value;
-                    const outletSurface = document.getElementById(`outlet-surface-${i}`) ? document.getElementById(`outlet-surface-${i}`).value : 'Mampostería';
+                    const outletTypeEl = document.getElementById(`outlet-type-${i}`);
+                    const outletSurfaceEl = document.getElementById(`outlet-surface-${i}`);
+                    const outletType = outletTypeEl ? outletTypeEl.value : '';
+                    const outletSurface = outletSurfaceEl ? outletSurfaceEl.value : 'Mampostería';
                     let totalPlatesOrBoxesAdded = false;
 
                     if (outletType === 'Embutir') {
-                        const out1 = parseInt(document.getElementById(`emb-qty-1-${i}`).value) || 0;
-                        const out2 = parseInt(document.getElementById(`emb-qty-2-${i}`).value) || 0;
-                        const out3 = parseInt(document.getElementById(`emb-qty-3-${i}`).value) || 0;
-                        const incBox = document.getElementById(`emb-include-box-${i}`).checked;
+                        const out1El = document.getElementById(`emb-qty-1-${i}`);
+                        const out2El = document.getElementById(`emb-qty-2-${i}`);
+                        const out3El = document.getElementById(`emb-qty-3-${i}`);
+                        const incBoxEl = document.getElementById(`emb-include-box-${i}`);
+                        
+                        const out1 = out1El ? (parseInt(out1El.value) || 0) : 0;
+                        const out2 = out2El ? (parseInt(out2El.value) || 0) : 0;
+                        const out3 = out3El ? (parseInt(out3El.value) || 0) : 0;
+                        const incBox = incBoxEl ? incBoxEl.checked : false;
 
                         const totalPlates = out1 + out2 + out3;
 
@@ -2326,9 +2451,9 @@
                             totalPlatesOrBoxesAdded = true;
                         }
 
-                        if (document.getElementById(`emb-qty-1-${i}`)) document.getElementById(`emb-qty-1-${i}`).value = 0;
-                        if (document.getElementById(`emb-qty-2-${i}`)) document.getElementById(`emb-qty-2-${i}`).value = 0;
-                        if (document.getElementById(`emb-qty-3-${i}`)) document.getElementById(`emb-qty-3-${i}`).value = 0;
+                        if (out1El) out1El.value = 0;
+                        if (out2El) out2El.value = 0;
+                        if (out3El) out3El.value = 0;
                         
                     } else {
                         for (let j = 1; j <= 6; j++) {
@@ -2345,8 +2470,10 @@
                     }
 
                     if (totalPlatesOrBoxesAdded) {
-                        const univQty = parseInt(document.getElementById(`mod-universal-${i}`).value) || 0;
-                        const schukoQty = parseInt(document.getElementById(`mod-schuko-${i}`).value) || 0;
+                        const univEl = document.getElementById(`mod-universal-${i}`);
+                        const schukoEl = document.getElementById(`mod-schuko-${i}`);
+                        const univQty = univEl ? (parseInt(univEl.value) || 0) : 0;
+                        const schukoQty = schukoEl ? (parseInt(schukoEl.value) || 0) : 0;
 
                         if (univQty > 0) pushConsolidated(`Módulo Tomacorriente Universal (220V)`, univQty, 'un', 0);
                         if (schukoQty > 0) pushConsolidated(`Módulo Tomacorriente Schuko (220V)`, schukoQty, 'un', 0);
@@ -2362,41 +2489,46 @@
         }
 
         function updateConduitOptions(index) {
-            const type = document.getElementById(`conduit-type-${index}`).value;
+            const typeSelect = document.getElementById(`conduit-type-${index}`);
+            if (!typeSelect) return;
+            
+            const type = typeSelect.value;
             const sizeSelect = document.getElementById(`conduit-size-${index}`);
             const clampContainer = document.getElementById(`clamp-container-${index}`);
             const colorContainer = document.getElementById(`conduit-color-container-${index}`);
             const unitsInput = document.getElementById(`conduit-units-${index}`);
             const unitsLabel = document.getElementById(`conduit-units-label-${index}`);
             
+            if (!sizeSelect) return;
+
             sizeSelect.innerHTML = '';
             let sizes = [];
             let length = 3;
 
             if (type === 'Caño Conduit PVC') {
                 sizes = ['16mm', '20mm', '25mm', '32mm', '50mm'];
-                clampContainer.classList.remove('hidden');
-                colorContainer.classList.remove('hidden');
+                if(clampContainer) clampContainer.classList.remove('hidden');
+                if(colorContainer) colorContainer.classList.remove('hidden');
                 length = 3;
             } else if (type === 'Caño Metálico Zincado') {
                 sizes = ['16mm', '20mm', '25mm', '32mm', '50mm'];
-                clampContainer.classList.remove('hidden');
-                colorContainer.classList.add('hidden');
+                if(clampContainer) clampContainer.classList.remove('hidden');
+                if(colorContainer) colorContainer.classList.add('hidden');
                 length = 3;
             } else if (type === 'Cable Canal PVC') {
                 sizes = ['14x7mm', '20x10mm', '50x20mm', '100x50mm'];
-                clampContainer.classList.add('hidden');
-                colorContainer.classList.add('hidden');
+                if(clampContainer) clampContainer.classList.add('hidden');
+                if(colorContainer) colorContainer.classList.add('hidden');
                 length = 2; // Estándar de mercado para cable canal
             } else if (type === 'Cable Canal PVC p/ piso') {
                 sizes = ['50x13mm', '70x18mm'];
-                clampContainer.classList.add('hidden');
-                colorContainer.classList.add('hidden');
+                if(clampContainer) clampContainer.classList.add('hidden');
+                if(colorContainer) colorContainer.classList.add('hidden');
                 length = 2; // Estándar de mercado para cable canal de piso
             } else if (type === 'Cable Canal PVC ranurado') {
                 sizes = ['40x30mm', '50x40mm', '50x80mm', '65x45mm', '80x35mm', '80x80mm', '110x50mm', '110x80mm'];
-                clampContainer.classList.add('hidden');
-                colorContainer.classList.add('hidden');
+                if(clampContainer) clampContainer.classList.add('hidden');
+                if(colorContainer) colorContainer.classList.add('hidden');
                 length = 2; // Estándar de mercado para cable canal ranurado
             }
 
@@ -2407,15 +2539,23 @@
                 sizeSelect.appendChild(opt);
             });
 
-            unitsInput.dataset.length = length;
-            unitsLabel.innerText = `Cant. Unidades (${length}m c/u)`;
+            if (unitsInput && unitsLabel) {
+                unitsInput.dataset.length = length;
+                unitsLabel.innerText = `Cant. Unidades (${length}m c/u)`;
+            }
             
             calculateConduitMeters(index);
         }
 
         function updateFlexConduitOptions(index) {
-            const type = document.getElementById(`flex-conduit-type-${index}`).value;
+            const typeSelect = document.getElementById(`flex-conduit-type-${index}`);
+            if (!typeSelect) return;
+            
+            const type = typeSelect.value;
             const colorSelect = document.getElementById(`flex-conduit-color-${index}`);
+            
+            if (!colorSelect) return;
+            
             colorSelect.innerHTML = '';
             
             let colors = [];
@@ -2434,10 +2574,15 @@
         }
 
         function updateJunctionBoxOptions() {
-            const type = document.getElementById('junction-box-type').value;
+            const typeSelect = document.getElementById('junction-box-type');
+            if (!typeSelect) return;
+            const type = typeSelect.value;
+            
             const sizeSelect = document.getElementById('junction-box-size');
             const colorSelect = document.getElementById('junction-box-color');
             const connectorTypeSelect = document.getElementById('junction-connector-type');
+            
+            if (!sizeSelect || !colorSelect) return;
             
             sizeSelect.innerHTML = '';
             colorSelect.innerHTML = '';
@@ -2534,9 +2679,13 @@
         }
 
         function calculateConduitMeters(index) {
-            const units = parseInt(document.getElementById(`conduit-units-${index}`).value) || 0;
-            const length = parseInt(document.getElementById(`conduit-units-${index}`).dataset.length) || 3;
-            document.getElementById(`conduit-meters-display-${index}`).value = (units * length) + " m";
+            const unitsEl = document.getElementById(`conduit-units-${index}`);
+            const displayEl = document.getElementById(`conduit-meters-display-${index}`);
+            if (!unitsEl || !displayEl) return;
+            
+            const units = parseInt(unitsEl.value) || 0;
+            const length = parseInt(unitsEl.dataset.length) || 3;
+            displayEl.value = (units * length) + " m";
         }
 
         function addConduit() {
@@ -2546,13 +2695,20 @@
             for (let i = 1; i <= 2; i++) {
                 const includeRigid = document.getElementById(`include-conduit-${i}`);
                 if (includeRigid && includeRigid.checked) {
-                    const units = parseInt(document.getElementById(`conduit-units-${i}`).value) || 0;
+                    const unitsEl = document.getElementById(`conduit-units-${i}`);
+                    const units = unitsEl ? (parseInt(unitsEl.value) || 0) : 0;
+                    
                     if (units > 0) {
-                        const type = document.getElementById(`conduit-type-${i}`).value;
-                        const size = document.getElementById(`conduit-size-${i}`).value;
+                        const typeEl = document.getElementById(`conduit-type-${i}`);
+                        const sizeEl = document.getElementById(`conduit-size-${i}`);
+                        const colorEl = document.getElementById(`conduit-color-${i}`);
+                        
+                        const type = typeEl ? typeEl.value : '';
+                        const size = sizeEl ? sizeEl.value : '';
+                        const color = colorEl ? colorEl.value : '';
+                        
                         const isTube = (type === 'Caño Conduit PVC' || type === 'Caño Metálico Zincado');
                         const isConduit = (type === 'Caño Conduit PVC');
-                        const color = document.getElementById(`conduit-color-${i}`).value;
                         
                         let desc = `${type} medida ${size}`;
                         if (isConduit) {
@@ -2562,13 +2718,15 @@
                         pushConsolidated(desc, units, 'un', 0);
                         
                         if (isTube) {
-                            const clampType = document.getElementById(`clamp-type-${i}`).value;
-                            const clampSurface = document.getElementById(`clamp-surface-${i}`).value;
+                            const clampTypeEl = document.getElementById(`clamp-type-${i}`);
+                            const clampSurfaceEl = document.getElementById(`clamp-surface-${i}`);
+                            const clampType = clampTypeEl ? clampTypeEl.value : 'PVC';
+                            const clampSurface = clampSurfaceEl ? clampSurfaceEl.value : 'Mampostería';
                             const supportQty = units * 2; 
                             pushConsolidated(`Abrazadera Tipo D (${clampType}) para ${size}`, supportQty, 'un', 0, clampSurface);
                         }
                         
-                        document.getElementById(`conduit-units-${i}`).value = 0;
+                        if(unitsEl) unitsEl.value = 0;
                         calculateConduitMeters(i);
                         itemAdded = true;
                     }
@@ -2579,18 +2737,26 @@
             for (let i = 1; i <= 2; i++) {
                 const includeFlex = document.getElementById(`include-flex-conduit-${i}`);
                 if (includeFlex && includeFlex.checked) {
-                    const meters = parseInt(document.getElementById(`flex-conduit-meters-${i}`).value) || 0;
+                    const metersEl = document.getElementById(`flex-conduit-meters-${i}`);
+                    const meters = metersEl ? (parseInt(metersEl.value) || 0) : 0;
+                    
                     if (meters > 0) {
-                        const type = document.getElementById(`flex-conduit-type-${i}`).value;
-                        const size = document.getElementById(`flex-conduit-size-${i}`).value;
-                        const color = document.getElementById(`flex-conduit-color-${i}`).value;
-                        const clampType = document.getElementById(`flex-clamp-type-${i}`).value;
-                        const clampSurface = document.getElementById(`flex-clamp-surface-${i}`).value;
+                        const typeEl = document.getElementById(`flex-conduit-type-${i}`);
+                        const sizeEl = document.getElementById(`flex-conduit-size-${i}`);
+                        const colorEl = document.getElementById(`flex-conduit-color-${i}`);
+                        const clampTypeEl = document.getElementById(`flex-clamp-type-${i}`);
+                        const clampSurfaceEl = document.getElementById(`flex-clamp-surface-${i}`);
+                        
+                        const type = typeEl ? typeEl.value : '';
+                        const size = sizeEl ? sizeEl.value : '';
+                        const color = colorEl ? colorEl.value : '';
+                        const clampType = clampTypeEl ? clampTypeEl.value : 'PVC';
+                        const clampSurface = clampSurfaceEl ? clampSurfaceEl.value : 'Mampostería';
 
                         pushConsolidated(`${type} Color ${color} medida ${size}`, meters, 'm', 0);
                         pushConsolidated(`Abrazadera Tipo D (${clampType}) para ${size}`, meters, 'un', 0, clampSurface); 
                         
-                        document.getElementById(`flex-conduit-meters-${i}`).value = 0;
+                        if(metersEl) metersEl.value = 0;
                         itemAdded = true;
                     }
                 }
@@ -2599,29 +2765,39 @@
             // CAJAS DE PASO
             const includeJunctionBox = document.getElementById('include-junction-box');
             if (includeJunctionBox && includeJunctionBox.checked) {
-                const qty = parseInt(document.getElementById('junction-box-qty').value) || 0;
-                const surface = document.getElementById('junction-box-surface').value;
+                const qtyEl = document.getElementById('junction-box-qty');
+                const surfaceEl = document.getElementById('junction-box-surface');
+                const qty = qtyEl ? (parseInt(qtyEl.value) || 0) : 0;
+                const surface = surfaceEl ? surfaceEl.value : 'Mampostería';
                 
                 if (qty > 0) {
-                    const type = document.getElementById('junction-box-type').value;
-                    const size = document.getElementById('junction-box-size').value;
-                    const color = document.getElementById('junction-box-color').value;
+                    const typeEl = document.getElementById('junction-box-type');
+                    const sizeEl = document.getElementById('junction-box-size');
+                    const colorEl = document.getElementById('junction-box-color');
+                    
+                    const type = typeEl ? typeEl.value : '';
+                    const size = sizeEl ? sizeEl.value : '';
+                    const color = colorEl ? colorEl.value : '';
 
                     let desc = `${type} Color ${color} medida ${size}`;
                     pushConsolidated(desc, qty, 'un', 0, surface);
                     
-                    document.getElementById('junction-box-qty').value = 0;
+                    if(qtyEl) qtyEl.value = 0;
                     itemAdded = true;
                 }
 
-                // Añadir conectores (ahora visibles y disponibles para todas las cajas)
-                const connQty = parseInt(document.getElementById('junction-connector-qty').value) || 0;
+                // Añadir conectores
+                const connQtyEl = document.getElementById('junction-connector-qty');
+                const connQty = connQtyEl ? (parseInt(connQtyEl.value) || 0) : 0;
                 if (connQty > 0) {
-                    const connType = document.getElementById('junction-connector-type').value;
-                    const connSize = document.getElementById('junction-connector-size').value;
+                    const connTypeEl = document.getElementById('junction-connector-type');
+                    const connSizeEl = document.getElementById('junction-connector-size');
+                    
+                    const connType = connTypeEl ? connTypeEl.value : '';
+                    const connSize = connSizeEl ? connSizeEl.value : '';
                     
                     pushConsolidated(`${connType} medida ${connSize}`, connQty, 'un', 0, surface); 
-                    document.getElementById('junction-connector-qty').value = 0;
+                    if(connQtyEl) connQtyEl.value = 0;
                     itemAdded = true;
                 }
             }
@@ -2658,6 +2834,11 @@
                     item[field] = parseFloat(value) || 0;
                 } else {
                     item[field] = value;
+                    // Sincronizar el texto oculto de impresión cuando se edita la descripción
+                    if (field === 'description') {
+                        const printSpan = document.getElementById(`desc-print-${id}`);
+                        if (printSpan) printSpan.innerText = value;
+                    }
                 }
                 
                 const subtotalTd = document.getElementById(`subtotal-${id}`);
@@ -2678,23 +2859,24 @@
                 const row = document.createElement('tr');
                 row.className = "border-b border-slate-100 hover:bg-slate-50 transition-colors";
                 row.innerHTML = `
-                    <td class="px-4 py-2">
+                    <td class="px-3 py-2 md:px-4 md:py-2">
                         <input type="text" value="${item.description}" onchange="updateItem(${item.id}, 'description', this.value)" 
-                            class="w-full bg-transparent outline-none focus:bg-white focus:ring-1 focus:ring-blue-300 rounded px-1 py-1 font-medium text-slate-700 text-sm">
+                            class="w-full bg-transparent outline-none focus:bg-white focus:ring-1 focus:ring-blue-300 rounded px-1 py-1 font-medium text-slate-700 text-xs md:text-sm no-print min-w-[200px]">
+                        <span id="desc-print-${item.id}" class="print-only font-medium text-[11pt] leading-snug whitespace-normal break-words">${item.description}</span>
                     </td>
-                    <td class="px-4 py-2 text-center">
+                    <td class="px-2 py-2 md:px-4 md:py-2 text-center">
                         <input type="number" value="${item.quantity}" onchange="updateItem(${item.id}, 'quantity', this.value)" 
-                            class="w-16 text-center bg-slate-50 border border-slate-200 rounded py-1 text-sm font-bold">
+                            class="w-12 md:w-16 text-center bg-slate-50 border border-slate-200 rounded py-1 text-xs md:text-sm font-bold">
                     </td>
-                    <td class="px-4 py-2 text-center text-[10px] text-slate-400 font-bold uppercase">${item.unit}</td>
-                    <td class="px-4 py-2 text-right">
+                    <td class="px-2 py-2 md:px-4 md:py-2 text-center text-[9px] md:text-[10px] text-slate-400 font-bold uppercase">${item.unit}</td>
+                    <td class="px-2 py-2 md:px-4 md:py-2 text-right">
                         <input type="number" value="${item.price}" onchange="updateItem(${item.id}, 'price', this.value)" 
-                            class="w-24 text-right bg-slate-50 border border-slate-200 rounded py-1 text-sm font-mono">
+                            class="w-16 md:w-24 text-right bg-slate-50 border border-slate-200 rounded py-1 text-xs md:text-sm font-mono">
                     </td>
-                    <td id="subtotal-${item.id}" class="px-4 py-2 font-bold text-slate-700 text-sm text-right font-mono">${formatCurrency(subtotal)}</td>
-                    <td class="px-4 py-2 text-right no-print">
-                        <button onclick="removeItem(${item.id})" class="text-slate-300 hover:text-red-500 p-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <td id="subtotal-${item.id}" class="px-3 py-2 md:px-4 md:py-2 font-bold text-slate-700 text-xs md:text-sm text-right font-mono whitespace-nowrap">${formatCurrency(subtotal)}</td>
+                    <td class="px-2 py-2 md:px-4 md:py-2 text-right no-print">
+                        <button onclick="removeItem(${item.id})" class="text-slate-300 hover:text-red-500 p-1 md:p-2 rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                             </svg>
                         </button>
@@ -2715,10 +2897,15 @@
         }
 
         function addCalculatedToTable() {
-            const tech = document.getElementById('tech-type').value;
-            const cableMeters = parseFloat(document.getElementById('cable-meters').value) || 0;
-            const cableCat = document.getElementById('cable-cat').value;
-            const cableEnv = document.getElementById('cable-env').value;
+            const techEl = document.getElementById('tech-type');
+            const cableMetersEl = document.getElementById('cable-meters');
+            const cableCatEl = document.getElementById('cable-cat');
+            const cableEnvEl = document.getElementById('cable-env');
+            
+            const tech = techEl ? techEl.value : 'networking';
+            const cableMeters = cableMetersEl ? (parseFloat(cableMetersEl.value) || 0) : 0;
+            const cableCat = cableCatEl ? cableCatEl.value : '';
+            const cableEnv = cableEnvEl ? cableEnvEl.value : '';
             
             if (tech === 'networking') {
                 const apCountElement = document.getElementById('ap-count');
@@ -2729,10 +2916,15 @@
                 if (apCount > 0) {
                     pushConsolidated(`Punto de Acceso (AP) WiFi Industrial`, apCount, 'un', 0, 'Mampostería');
                     
-                    const sType = document.getElementById('ap-start-type').value;
-                    const sShield = document.getElementById('ap-start-shield').value;
-                    const eType = document.getElementById('ap-end-type').value;
-                    const eShield = document.getElementById('ap-end-shield').value;
+                    const sTypeEl = document.getElementById('ap-start-type');
+                    const sShieldEl = document.getElementById('ap-start-shield');
+                    const eTypeEl = document.getElementById('ap-end-type');
+                    const eShieldEl = document.getElementById('ap-end-shield');
+                    
+                    const sType = sTypeEl ? sTypeEl.value : '';
+                    const sShield = sShieldEl ? sShieldEl.value : '';
+                    const eType = eTypeEl ? eTypeEl.value : '';
+                    const eShield = eShieldEl ? eShieldEl.value : '';
                     
                     pushConsolidated(`${sType} RJ45 Cat 6 (${sShield})`, apCount, 'un', 0);
                     pushConsolidated(`${eType} RJ45 Cat 6 (${eShield})`, apCount, 'un', 0);
@@ -2752,8 +2944,11 @@
             } else {
                 let totalCams = 0;
                 let camLines = [];
-                const connectorType = document.getElementById('connector-type') ? document.getElementById('connector-type').value : 'Sin Blindaje';
-                const brand = document.getElementById('cctv-brand') ? document.getElementById('cctv-brand').value : '';
+                const connectorTypeEl = document.getElementById('connector-type');
+                const brandEl = document.getElementById('cctv-brand');
+                
+                const connectorType = connectorTypeEl ? connectorTypeEl.value : 'Sin Blindaje';
+                const brand = brandEl ? brandEl.value : '';
 
                 for (let i = 1; i <= 5; i++) {
                     const qtyElement = document.getElementById(`cam-count-${i}`);
@@ -2766,15 +2961,16 @@
                         totalCams += qty;
                         camLines.push({ 
                             qty: qty, 
-                            type: typeSelect.value, 
-                            mp: mpSelect.value, 
-                            surface: surfaceSelect.value 
+                            type: typeSelect ? typeSelect.value : '', 
+                            mp: mpSelect ? mpSelect.value : '', 
+                            surface: surfaceSelect ? surfaceSelect.value : 'Mampostería'
                         });
                     }
                 }
                 
                 if (totalCams > 0) {
-                    const hddText = document.getElementById('storage-recommended').innerText;
+                    const hddTextEl = document.getElementById('storage-recommended');
+                    const hddText = hddTextEl ? hddTextEl.innerText : '0';
                     const hddSize = parseInt(hddText) || 0;
 
                     if (tech === 'analog') {
@@ -2807,19 +3003,22 @@
             renderTable();
         }
 
-        // Inicialización
-        document.getElementById('doc-date').valueAsDate = new Date();
-        changeCurrency();
-        updateCableTypes();
-        toggleTechMode();
-        
-        for(let i=1; i<=4; i++){
-            toggleOutletsUI(i);
-        }
-        for(let i=1; i<=2; i++){
-            updateConduitOptions(i);
-            updateFlexConduitOptions(i);
-      }
+        // Inicialización segura garantizando que el DOM está cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateEl = document.getElementById('doc-date');
+            if (dateEl) dateEl.valueAsDate = new Date();
+            
+            changeCurrency();
+            updateCableTypes();
+            toggleTechMode();
+            
+            for(let i=1; i<=4; i++){
+                toggleOutletsUI(i);
+            }
+            for(let i=1; i<=2; i++){
+                updateConduitOptions(i);
+                updateFlexConduitOptions(i);
+           }
         updateJunctionBoxOptions();
     </script> <script>
       if ('serviceWorker' in navigator) {
