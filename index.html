@@ -50,10 +50,10 @@
         }
         
         /* Estilos específicos para exportación nativa PDF (Móvil) */
-        body.pdf-mode { background: white !important; color: black !important; font-size: 11pt; }
+        body.pdf-mode { background: white !important; color: black !important; font-size: 11pt; overflow: visible !important; }
         body.pdf-mode .no-print { display: none !important; }
         body.pdf-mode .print-only { display: block !important; }
-        body.pdf-mode main { padding: 0 !important; max-width: 100% !important; margin: 0 !important; }
+        body.pdf-mode main { padding: 0 !important; max-width: 100% !important; margin: 0 !important; overflow: visible !important; }
         body.pdf-mode section { box-shadow: none !important; border: none !important; padding: 0 !important; margin-bottom: 20px !important; background: transparent !important; page-break-inside: avoid; }
         body.pdf-mode input, body.pdf-mode select, body.pdf-mode textarea { 
             border: none !important; 
@@ -68,7 +68,9 @@
         }
         body.pdf-mode .bg-slate-800 { background-color: transparent !important; color: black !important; padding: 0 !important; }
         body.pdf-mode .bg-slate-800 h2 { font-size: 14pt !important; color: black !important; width: 100%; border-bottom: 2px solid black; padding-bottom: 8px; margin-bottom: 10px; }
-        body.pdf-mode table { width: 100% !important; border-collapse: collapse !important; }
+        /* FORZAR TABLAS Y CONTENEDORES A NO CORTARSE EN MOVIL */
+        body.pdf-mode .overflow-x-auto { overflow: visible !important; }
+        body.pdf-mode table { width: 100% !important; min-width: 100% !important; border-collapse: collapse !important; }
         body.pdf-mode thead tr { background-color: transparent !important; border-bottom: 1px solid black !important; }
         body.pdf-mode th { color: black !important; font-size: 10pt !important; padding: 8px 4px !important; }
         body.pdf-mode tbody tr { border-bottom: 1px solid #e5e7eb !important; background: transparent !important; page-break-inside: avoid; }
@@ -1654,7 +1656,7 @@
             // Solución crucial para móviles: Subir al inicio antes de capturar
             window.scrollTo(0, 0);
 
-            // 1. Sincronizar todos los inputs y selectores (html2canvas no los lee si no están como atributos)
+            // 1. Sincronizar todos los inputs y selectores
             document.querySelectorAll('#view-module-redes input').forEach(el => {
                 if(el.type === 'checkbox' || el.type === 'radio') {
                     if(el.checked) el.setAttribute('checked', 'checked');
@@ -1678,10 +1680,13 @@
 
             const element = document.getElementById('view-module-redes');
             
-            // 3. Forzar el ancho del contenedor a diseño de PC para que no se aprieten las tablas
+            // 3. ENGAÑO AL NAVEGADOR MÓVIL: Forzar ancho a nivel de body y elemento
+            const originalBodyWidth = document.body.style.width;
             const originalWidth = element.style.width;
             const originalMaxWidth = element.style.maxWidth;
-            element.style.width = '1024px'; // Mejorado para evitar cortes
+            
+            document.body.style.width = '1024px';
+            element.style.width = '1024px'; 
             element.style.maxWidth = '1024px';
 
             // 4. Configurar opciones del generador
@@ -1696,22 +1701,25 @@
                     scale: 2, 
                     useCORS: true, 
                     windowWidth: 1024,
-                    scrollY: 0, // EVITA QUE SE CORTE EN EL CELULAR SI ESTÁ SCROLLEADO
+                    width: 1024, // FORZAR AL LIENZO A TOMAR FOTO COMPLETA
+                    scrollY: 0, 
                     scrollX: 0
                 },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-                pagebreak:    { mode: 'css', avoid: ['section', 'tr'] } // EVITA CORTES DE PAGINA A LA MITAD
+                pagebreak:    { mode: 'css', avoid: ['section', 'tr'] } 
             };
 
             // 5. Procesar y guardar
             html2pdf().set(opt).from(element).save().then(() => {
                 document.body.classList.remove('pdf-mode');
+                document.body.style.width = originalBodyWidth;
                 element.style.width = originalWidth;
                 element.style.maxWidth = originalMaxWidth;
                 if (btnText) btnText.innerText = originalText;
             }).catch(err => {
                 console.error("Error al generar PDF: ", err);
                 document.body.classList.remove('pdf-mode');
+                document.body.style.width = originalBodyWidth;
                 element.style.width = originalWidth;
                 element.style.maxWidth = originalMaxWidth;
                 if (btnText) btnText.innerText = originalText;
