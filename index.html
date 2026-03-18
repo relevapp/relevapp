@@ -1578,6 +1578,17 @@
         }
 
         function generatePDF() {
+            // DETECCIÓN DE DISPOSITIVO: ¿Es móvil o PC de escritorio?
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                             (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+            if (!isMobile) {
+                // VERSIÓN ESCRITORIO (PC): Impresión nativa limpia
+                window.print();
+                return;
+            }
+
+            // VERSIÓN MÓVIL (Smartphone/Tablet): Motor html2pdf
             const btnText = document.getElementById('btn-export-text');
             const originalText = btnText ? btnText.innerText : 'Guardar PDF';
             if (btnText) btnText.innerText = 'Generando...';
@@ -3127,7 +3138,5 @@
         });
       }
     </script>
-</body>
-</html>
 </body>
 </html>
