@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- Ajuste crucial para móviles: Evita el auto-zoom al tocar inputs -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ApohAPP Pro v9.8</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,35 +16,23 @@
             body { background: white !important; color: black !important; font-size: 11pt; -webkit-print-color-adjust: exact; }
             .no-print { display: none !important; }
             .print-only { display: block !important; }
-            
             main { padding: 0 !important; max-width: 100% !important; margin: 0 !important; }
             section { box-shadow: none !important; border: none !important; padding: 0 !important; margin-bottom: 20px !important; background: transparent !important; }
-            
             input, select, textarea { 
-                border: none !important; 
-                background: transparent !important; 
-                box-shadow: none !important;
-                appearance: none !important;
-                -webkit-appearance: none !important;
-                color: black !important;
-                pointer-events: none;
-                padding: 0 !important;
-                margin: 0 !important;
+                border: none !important; background: transparent !important; box-shadow: none !important;
+                appearance: none !important; -webkit-appearance: none !important; color: black !important;
+                pointer-events: none; padding: 0 !important; margin: 0 !important;
             }
-            
             .bg-slate-800 { background-color: transparent !important; color: black !important; padding: 0 !important; }
             .bg-slate-800 h2 { font-size: 14pt !important; color: black !important; width: 100%; border-bottom: 2px solid black; padding-bottom: 8px; margin-bottom: 10px; }
-            
             table { width: 100% !important; border-collapse: collapse !important; }
             thead tr { background-color: transparent !important; border-bottom: 1px solid black !important; }
             th { color: black !important; font-size: 10pt !important; padding: 8px 4px !important; }
             tbody tr { border-bottom: 1px solid #e5e7eb !important; background: transparent !important; }
             td { color: black !important; font-size: 10pt !important; padding: 8px 4px !important; }
-            
             .bg-slate-50 { background-color: transparent !important; padding: 0 !important; }
             .border-t-2 { border-top: 2px solid black !important; }
             .text-blue-700 { color: black !important; }
-            
             #view-home { display: none !important; }
         }
         
@@ -56,19 +43,12 @@
         body.pdf-mode main { padding: 0 !important; max-width: 100% !important; margin: 0 !important; overflow: visible !important; }
         body.pdf-mode section { box-shadow: none !important; border: none !important; padding: 0 !important; margin-bottom: 20px !important; background: transparent !important; page-break-inside: avoid; }
         body.pdf-mode input, body.pdf-mode select, body.pdf-mode textarea { 
-            border: none !important; 
-            background: transparent !important; 
-            box-shadow: none !important;
-            appearance: none !important;
-            -webkit-appearance: none !important;
-            color: black !important;
-            pointer-events: none;
-            padding: 0 !important;
-            margin: 0 !important;
+            border: none !important; background: transparent !important; box-shadow: none !important;
+            appearance: none !important; -webkit-appearance: none !important; color: black !important;
+            pointer-events: none; padding: 0 !important; margin: 0 !important;
         }
         body.pdf-mode .bg-slate-800 { background-color: transparent !important; color: black !important; padding: 0 !important; }
         body.pdf-mode .bg-slate-800 h2 { font-size: 14pt !important; color: black !important; width: 100%; border-bottom: 2px solid black; padding-bottom: 8px; margin-bottom: 10px; }
-        /* FORZAR TABLAS Y CONTENEDORES A NO CORTARSE EN MOVIL */
         body.pdf-mode .overflow-x-auto { overflow: visible !important; }
         body.pdf-mode table { width: 100% !important; min-width: 100% !important; border-collapse: collapse !important; }
         body.pdf-mode thead tr { background-color: transparent !important; border-bottom: 1px solid black !important; }
@@ -80,43 +60,14 @@
         body.pdf-mode .text-blue-700 { color: black !important; }
         
         .print-only { display: none; }
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
-        }
-        input:disabled {
-            background-color: #f1f5f9;
-            color: #64748b;
-            cursor: not-allowed;
-            border-color: #e2e8f0;
-            font-weight: normal;
-        }
-        .section-step {
-            transition: all 0.3s ease;
-        }
-        
-        /* Animaciones para el inicio */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        
-        /* Custom scrollbar para moviles */
-        .overflow-x-auto::-webkit-scrollbar {
-            height: 6px;
-        }
-        .overflow-x-auto::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 4px;
-        }
-        .overflow-x-auto::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input:disabled { background-color: #f1f5f9; color: #64748b; cursor: not-allowed; border-color: #e2e8f0; font-weight: normal; }
+        .section-step { transition: all 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        .overflow-x-auto::-webkit-scrollbar { height: 6px; }
+        .overflow-x-auto::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .overflow-x-auto::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0f172a">
@@ -124,37 +75,24 @@
 </head>
 <body class="bg-slate-50 min-h-screen font-sans text-slate-900">
 
-    <!-- Header Dinámico -->
     <header class="bg-slate-800 text-white p-3 md:p-4 shadow-md no-print sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center gap-2">
             <div class="flex items-center gap-2 md:gap-4">
-                <!-- Botón Volver -->
                 <button id="btn-back" onclick="goHome()" class="hidden bg-slate-700 hover:bg-slate-600 p-2 rounded-lg transition-colors items-center justify-center shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" /></svg>
                 </button>
-                
                 <h1 class="text-base md:text-xl font-bold flex items-center gap-1.5 md:gap-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
                     ApohAPP Pro <span class="text-[7px] md:text-[8px] leading-none bg-blue-500 px-1 py-[2px] rounded-sm ml-0.5 font-bold self-end mb-[2px] md:mb-[4px]">v9.8</span>
                 </h1>
             </div>
-
-            <!-- Acciones de Cabecera -->
             <div id="header-actions" class="hidden items-center gap-2 md:gap-4 shrink-0">
                 <div id="global-net-badge" class="hidden md:flex bg-slate-700 px-3 py-1 rounded-full border border-slate-600 items-center gap-2">
                     <span class="text-[10px] uppercase font-bold text-slate-400">Progreso Red:</span>
                     <span id="global-net-counter" class="text-xs font-black text-white">0 / 0</span>
                 </div>
-                <!-- NUEVO BOTÓN GENERAR PDF -->
                 <button id="btn-export" onclick="generatePDF()" class="bg-blue-600 hover:bg-blue-700 px-3 py-2 md:px-4 md:py-2 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 text-sm shadow-md" title="Exportar / Imprimir PDF">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     <span class="hidden md:inline" id="btn-export-text">Guardar PDF</span>
                 </button>
             </div>
@@ -162,72 +100,44 @@
     </header>
 
     <main class="container mx-auto p-3 sm:p-4 md:p-6 lg:max-w-5xl">
-
-        <!-- ========================================== -->
-        <!-- PANTALLA DE INICIO (DASHBOARD) -->
-        <!-- ========================================== -->
         <div id="view-home" class="py-6 md:py-8 no-print">
             <div class="text-center mb-6 md:mb-10 animate-fade-in px-4">
                 <h2 class="text-2xl md:text-3xl font-black text-slate-800 mb-2 tracking-tight">Bienvenido a ApohAPP</h2>
                 <p class="text-xs sm:text-sm md:text-base text-slate-500">Selecciona el módulo de trabajo para comenzar un nuevo relevamiento.</p>
             </div>
-
-            <!-- Ajuste crucial: grid-cols-2 fuerza 2 columnas en TODAS las pantallas -->
             <div class="grid grid-cols-2 gap-3 md:gap-6 max-w-4xl mx-auto px-3 md:px-0">
-                
-                <!-- TARJETA 1: REDES Y CCTV -->
                 <div onclick="openModule('redes-cctv')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-blue-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.1s;">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                     </div>
                     <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">Redes y CCTV</h3>
                     <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Presupuesto integral de cámaras, cableado, racks y energía.</p>
                 </div>
-
-                <!-- TARJETA 2: ALARMA Y VIDEOPORTERO -->
                 <div onclick="openModule('alarma')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-purple-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.2s;">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
                     </div>
                     <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">Alarma y Videoport.</h3>
                     <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Sistemas de intrusión, sirenas, sensores y accesos.</p>
                 </div>
-
-                <!-- TARJETA 3: PCI DETECCIÓN -->
                 <div onclick="openModule('pci')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-red-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.3s;">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-red-50 text-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" /></svg>
                     </div>
                     <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">PCI Detección</h3>
                     <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Prevención Contra Incendios, detectores y paneles.</p>
                 </div>
-
-                <!-- TARJETA 4: ELECTRICIDAD -->
                 <div onclick="openModule('electricidad')" class="cursor-pointer bg-white rounded-xl md:rounded-2xl shadow-sm border-2 border-transparent hover:border-amber-500 hover:shadow-xl transition-all p-3 sm:p-5 md:p-8 flex flex-col items-center justify-start gap-2 md:gap-4 group animate-fade-in" style="animation-delay: 0.4s;">
                     <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                     </div>
                     <h3 class="text-[10px] sm:text-sm md:text-xl font-black text-slate-800 uppercase tracking-tight text-center leading-tight mt-1 md:mt-0">Electricidad</h3>
                     <p class="text-[8px] sm:text-[10px] md:text-sm text-slate-500 text-center font-medium leading-tight">Tendido eléctrico general, tableros y luminarias.</p>
                 </div>
-
             </div>
-            
-            <!-- ALERTA DE CONSTRUCCIÓN -->
             <div id="construction-alert" class="hidden max-w-md mx-auto mt-6 bg-slate-800 text-white p-3 md:p-4 rounded-xl shadow-lg items-center gap-3 md:gap-4 animate-fade-in mx-4">
                 <div class="bg-amber-500 text-white p-2 rounded-full shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                 </div>
                 <div>
                     <h4 class="font-bold text-sm">Módulo en Desarrollo</h4>
@@ -236,13 +146,7 @@
             </div>
         </div>
 
-
-        <!-- ========================================== -->
-        <!-- MÓDULO 1: REDES Y CCTV                     -->
-        <!-- ========================================== -->
         <div id="view-module-redes" class="hidden animate-fade-in">
-            
-            <!-- Datos del Cliente -->
             <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 md:p-5 mb-4 md:mb-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                     <div>
@@ -256,10 +160,7 @@
                 </div>
             </section>
 
-            <!-- CONFIGURADOR POR SECCIONES ADAPTATIVO -->
             <div id="sections-container" class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8 no-print">
-                
-                <!-- 1. INFRAESTRUCTURA -->
                 <section id="sec-infra" class="section-step bg-blue-50 rounded-xl border border-blue-200 p-4 md:p-5 shadow-sm order-1">
                     <h2 class="text-blue-800 font-black mb-4 uppercase text-[10px] tracking-widest flex items-center gap-2">
                         <span class="step-number bg-blue-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px]">1</span>
@@ -274,14 +175,11 @@
                                 <option value="networking" selected>Redes y Datos</option>
                             </select>
                         </div>
-
                         <div id="cctv-fields" class="space-y-3 hidden">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div>
                                     <label class="block text-[9px] font-bold text-slate-500 uppercase">Marca de Equipos</label>
-                                    <select id="cctv-brand" onchange="updateCameraOptions()" class="w-full p-2 border border-blue-200 rounded-lg text-xs font-bold bg-white">
-                                        <!-- Opciones dinámicas -->
-                                    </select>
+                                    <select id="cctv-brand" onchange="updateCameraOptions()" class="w-full p-2 border border-blue-200 rounded-lg text-xs font-bold bg-white"></select>
                                 </div>
                                 <div>
                                     <label class="block text-[9px] font-bold text-slate-500 uppercase">Tipo Conector (IP)</label>
@@ -291,21 +189,14 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- CÁLCULO DE ALMACENAMIENTO -->
                             <div class="bg-blue-100/50 p-3 rounded-lg border border-blue-200 shadow-inner">
                                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-2">
                                     <label class="text-[9px] font-bold text-blue-800 uppercase flex items-center gap-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s-8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s-8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
                                         Almacenamiento (H.265+)
                                     </label>
                                     <select id="storage-retention" onchange="calculateStorage()" class="w-full sm:w-auto p-1.5 border border-blue-300 rounded text-[10px] font-bold bg-white text-blue-800 outline-none">
-                                        <option value="15">15 Días</option>
-                                        <option value="30" selected>1 Mes (30 días)</option>
-                                        <option value="60">2 Meses (60 días)</option>
-                                        <option value="90">3 Meses (90 días)</option>
+                                        <option value="15">15 Días</option><option value="30" selected>1 Mes (30 días)</option><option value="60">2 Meses (60 días)</option><option value="90">3 Meses (90 días)</option>
                                     </select>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2">
@@ -319,7 +210,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="bg-white rounded-lg border border-blue-100 shadow-inner overflow-x-auto">
                                 <div class="min-w-[380px] p-2">
                                     <div class="grid grid-cols-12 gap-1 mb-1 px-1">
@@ -329,15 +219,13 @@
                                         <div class="col-span-3 text-[8px] font-black text-slate-400 uppercase">Montaje en</div>
                                     </div>
                                     <div class="space-y-1">
-                                        <!-- Líneas de Cámara -->
                                         <div class="grid grid-cols-12 gap-1">
                                             <div class="col-span-2"><input type="number" id="cam-count-1" min="0" value="0" oninput="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-center font-bold text-xs h-7"></div>
                                             <div class="col-span-4"><select id="cctv-cam-type-1" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
                                             <div class="col-span-3"><select id="cctv-cam-mp-1" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
                                             <div class="col-span-3">
                                                 <select id="cctv-cam-surface-1" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
-                                                    <option value="Mampostería">Mampost. / Conc.</option>
-                                                    <option value="Metal">Estruct. Metál.</option>
+                                                    <option value="Mampostería">Mampost. / Conc.</option><option value="Metal">Estruct. Metál.</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -347,8 +235,7 @@
                                             <div class="col-span-3"><select id="cctv-cam-mp-2" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
                                             <div class="col-span-3">
                                                 <select id="cctv-cam-surface-2" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
-                                                    <option value="Mampostería">Mampost. / Conc.</option>
-                                                    <option value="Metal">Estruct. Metál.</option>
+                                                    <option value="Mampostería">Mampost. / Conc.</option><option value="Metal">Estruct. Metál.</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -358,8 +245,7 @@
                                             <div class="col-span-3"><select id="cctv-cam-mp-3" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
                                             <div class="col-span-3">
                                                 <select id="cctv-cam-surface-3" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
-                                                    <option value="Mampostería">Mampost. / Conc.</option>
-                                                    <option value="Metal">Estruct. Metál.</option>
+                                                    <option value="Mampostería">Mampost. / Conc.</option><option value="Metal">Estruct. Metál.</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -369,8 +255,7 @@
                                             <div class="col-span-3"><select id="cctv-cam-mp-4" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
                                             <div class="col-span-3">
                                                 <select id="cctv-cam-surface-4" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
-                                                    <option value="Mampostería">Mampost. / Conc.</option>
-                                                    <option value="Metal">Estruct. Metál.</option>
+                                                    <option value="Mampostería">Mampost. / Conc.</option><option value="Metal">Estruct. Metál.</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -380,8 +265,7 @@
                                             <div class="col-span-3"><select id="cctv-cam-mp-5" onchange="calculateStorage()" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7"></select></div>
                                             <div class="col-span-3">
                                                 <select id="cctv-cam-surface-5" class="w-full p-1 border border-blue-200 rounded text-[8px] md:text-[9px] font-bold bg-white h-7">
-                                                    <option value="Mampostería">Mampost. / Conc.</option>
-                                                    <option value="Metal">Estruct. Metál.</option>
+                                                    <option value="Mampostería">Mampost. / Conc.</option><option value="Metal">Estruct. Metál.</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -392,13 +276,10 @@
 
                         <div id="net-fields" class="space-y-3">
                             <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-inner">
-                                <!-- DISEÑO AP -->
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-blue-50 border border-blue-200 rounded-lg p-2 mb-3 shadow-sm gap-3">
                                     <div class="flex items-center gap-3">
                                         <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md shrink-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" />
-                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd" /></svg>
                                         </div>
                                         <div>
                                             <label class="block text-[11px] font-black text-blue-900 uppercase">Puntos de Acceso (WIFI)</label>
@@ -407,19 +288,16 @@
                                     </div>
                                     <input type="number" id="ap-count" min="0" value="0" oninput="toggleAPLogic(); autoCalculateNetworking();" class="w-full sm:w-20 h-10 border-2 border-blue-300 rounded-lg text-center font-black text-lg text-blue-800 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all">
                                 </div>
-                                
                                 <div id="ap-logic-container" class="hidden space-y-3 pt-2 border-t border-blue-100">
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         <div class="bg-slate-50 p-2 rounded border border-slate-200">
                                             <label class="block text-[8px] font-black text-blue-600 uppercase mb-1">Inicio (Lado Rack)</label>
                                             <div class="grid grid-cols-2 gap-1">
                                                 <select id="ap-start-type" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
-                                                    <option value="Ficha RJ45">Ficha RJ45</option>
-                                                    <option value="Jack Keystone">Jack Keystone</option>
+                                                    <option value="Ficha RJ45">Ficha RJ45</option><option value="Jack Keystone">Jack Keystone</option>
                                                 </select>
                                                 <select id="ap-start-shield" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
-                                                    <option value="Sin Blindaje">Sin Blindaje</option>
-                                                    <option value="Blindado">Blindado</option>
+                                                    <option value="Sin Blindaje">Sin Blindaje</option><option value="Blindado">Blindado</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -427,27 +305,21 @@
                                             <label class="block text-[8px] font-black text-blue-600 uppercase mb-1">Fin (Lado AP)</label>
                                             <div class="grid grid-cols-2 gap-1">
                                                 <select id="ap-end-type" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
-                                                    <option value="Ficha RJ45">Ficha RJ45</option>
-                                                    <option value="Jack Keystone">Jack Keystone</option>
+                                                    <option value="Ficha RJ45">Ficha RJ45</option><option value="Jack Keystone">Jack Keystone</option>
                                                 </select>
                                                 <select id="ap-end-shield" class="p-1 border border-slate-300 rounded text-[9px] font-bold bg-white w-full">
-                                                    <option value="Sin Blindaje">Sin Blindaje</option>
-                                                    <option value="Blindado">Blindado</option>
+                                                    <option value="Sin Blindaje">Sin Blindaje</option><option value="Blindado">Blindado</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="bg-white p-3 rounded-lg border border-blue-100 shadow-inner">
-                                <!-- DISEÑO METAS DE RED -->
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-blue-50 border border-blue-200 rounded-lg p-2 shadow-sm gap-3">
                                     <div class="flex items-center gap-3">
                                         <div class="bg-blue-600 text-white p-2 rounded-lg shadow-md shrink-0">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                                         </div>
                                         <div>
                                             <label class="block text-[11px] font-black text-blue-900 uppercase">Meta: Puestos Red Totales</label>
@@ -469,18 +341,12 @@
                                 <div class="col-span-12 sm:col-span-8 md:col-span-3">
                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Categoría</label>
                                     <select id="cable-cat" onchange="updateCableTypes()" class="w-full h-9 px-2 py-1 border border-blue-200 rounded-md text-xs font-bold bg-slate-50 focus:bg-white outline-none transition-colors">
-                                        <option value="Cat 5e">Cat 5e</option>
-                                        <option value="Cat 6" selected>Cat 6</option>
-                                        <option value="Cat 6A">Cat 6A</option>
-                                        <option value="Cat 7">Cat 7</option>
-                                        <option value="Cat 8">Cat 8</option>
+                                        <option value="Cat 5e">Cat 5e</option><option value="Cat 6" selected>Cat 6</option><option value="Cat 6A">Cat 6A</option><option value="Cat 7">Cat 7</option><option value="Cat 8">Cat 8</option>
                                     </select>
                                 </div>
                                 <div class="col-span-12 md:col-span-6">
                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo y Blindaje</label>
-                                    <select id="cable-env" class="w-full h-9 px-2 py-1 border border-blue-200 rounded-md text-[10px] font-bold bg-slate-50 focus:bg-white outline-none transition-colors">
-                                        <!-- Se llena dinámicamente vía JS -->
-                                    </select>
+                                    <select id="cable-env" class="w-full h-9 px-2 py-1 border border-blue-200 rounded-md text-[10px] font-bold bg-slate-50 focus:bg-white outline-none transition-colors"></select>
                                 </div>
                             </div>
                         </div>
@@ -498,12 +364,9 @@
                             <span class="step-number bg-indigo-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">2</span>
                             Terminación de Datos
                         </h2>
-                        <div id="net-status-pill" class="text-[8px] font-black px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-400 uppercase shrink-0">
-                            Sin Meta
-                        </div>
+                        <div id="net-status-pill" class="text-[8px] font-black px-2 py-0.5 rounded border border-slate-300 bg-white text-slate-400 uppercase shrink-0">Sin Meta</div>
                     </div>
                     <div class="space-y-4">
-                        
                         <div>
                             <label class="block text-[9px] font-bold text-slate-500 uppercase mb-2">Placas de Pared</label>
                             <div class="grid grid-cols-3 gap-2">
@@ -521,8 +384,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- MONITOR DE PROGRESO DE RED -->
                         <div class="bg-white p-3 rounded-lg border border-indigo-200 shadow-inner">
                             <div class="flex justify-between text-[10px] font-bold uppercase mb-1">
                                 <span class="text-slate-500">Asignadas: <span id="monitor-assigned" class="text-indigo-600">0</span></span>
@@ -532,7 +393,6 @@
                                 <div id="net-progress-bar" class="bg-indigo-500 h-full transition-all" style="width: 0%"></div>
                             </div>
                         </div>
-
                         <div class="border-t border-indigo-100 pt-3 space-y-3">
                             <div class="bg-white p-3 rounded-lg border border-indigo-200">
                                 <label class="flex items-center gap-2 cursor-pointer mb-3">
@@ -541,13 +401,11 @@
                                 </label>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <select id="keystone-shield" class="w-full p-2 sm:p-1 border border-slate-200 rounded text-[10px] font-bold bg-white">
-                                        <option value="Sin Blindaje">Sin Blindaje</option>
-                                        <option value="Blindado">Blindado</option>
+                                        <option value="Sin Blindaje">Sin Blindaje</option><option value="Blindado">Blindado</option>
                                     </select>
                                     <input type="number" id="keystone-qty" min="0" value="0" disabled class="w-full p-2 sm:p-1 border border-slate-200 rounded text-center font-bold text-xs bg-slate-50">
                                 </div>
                             </div>
-
                             <div class="bg-white p-3 rounded-lg border border-indigo-200">
                                 <label class="flex items-center gap-2 cursor-pointer mb-2">
                                     <input type="checkbox" id="include-surface-box" onchange="toggleManualNetworking('box')" class="w-4 h-4 text-indigo-600 rounded">
@@ -556,7 +414,6 @@
                                 <input type="number" id="surface-box-qty" min="0" value="0" disabled class="w-full p-2 border border-slate-200 rounded text-center font-bold text-xs bg-slate-50">
                             </div>
                         </div>
-
                         <button onclick="addNetworkingDetails()" class="w-full bg-indigo-600 text-white p-3 rounded-lg font-bold hover:bg-indigo-700 transition text-[10px] uppercase shadow-md active:bg-indigo-800">
                             Cargar Terminaciones
                         </button>
@@ -573,14 +430,9 @@
                         <div>
                             <label class="block text-[9px] font-bold text-slate-500 uppercase">Medida de Rack Mural</label>
                             <select id="rack-size" class="w-full p-2.5 border border-slate-300 rounded-lg text-xs font-bold bg-white">
-                                <option value="0">Sin Rack</option>
-                                <option value="4">Rack Mural 4U</option>
-                                <option value="6">Rack Mural 6U</option>
-                                <option value="9">Rack Mural 9U</option>
-                                <option value="12">Rack Mural 12U</option>
+                                <option value="0">Sin Rack</option><option value="4">Rack Mural 4U</option><option value="6">Rack Mural 6U</option><option value="9">Rack Mural 9U</option><option value="12">Rack Mural 12U</option>
                             </select>
                         </div>
-
                         <div class="grid grid-cols-2 gap-2 bg-white p-2.5 border border-slate-200 rounded-lg items-center">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" id="include-tray" onchange="toggleTrayQty()" class="w-4 h-4 text-blue-600 rounded">
@@ -588,7 +440,6 @@
                             </label>
                             <input type="number" id="tray-qty" min="1" value="1" disabled class="w-full p-1.5 border border-slate-200 rounded text-center font-bold text-xs">
                         </div>
-
                         <div class="bg-white p-3 border border-slate-200 rounded-lg space-y-3">
                             <div class="flex justify-between items-center">
                                 <label class="flex items-center gap-2 cursor-pointer">
@@ -598,28 +449,20 @@
                                 <span id="patchpanel-calc-badge" class="text-[9px] font-black px-2 py-0.5 rounded bg-slate-100 text-slate-400">Auto: 0 un.</span>
                             </div>
                             <select id="patchpanel-type" disabled onchange="updatePatchPanelPreview()" class="w-full p-2 border border-slate-200 rounded text-[10px] font-bold bg-slate-50 transition-colors">
-                                <option value="24">Patch Panel 24 Puertos Cat6</option>
-                                <option value="48">Patch Panel 48 Puertos Cat6</option>
+                                <option value="24">Patch Panel 24 Puertos Cat6</option><option value="48">Patch Panel 48 Puertos Cat6</option>
                             </select>
                         </div>
-
-                        <!-- CALCULADORA DE UPS -->
                         <div class="bg-white p-3 border border-slate-200 rounded-lg space-y-2">
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" id="include-ups" onchange="toggleUpsType()" class="w-4 h-4 text-blue-600 rounded">
                                 <span class="text-[10px] font-bold text-slate-700 uppercase">Incluir UPS (Respaldo)</span>
                             </label>
-                            
                             <div id="ups-calculator-container" class="hidden border-t border-slate-200 pt-3 mt-2 space-y-3">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                     <div class="bg-slate-50 p-2 rounded text-center border border-slate-200">
                                         <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Switch PoE</label>
                                         <select id="ups-switch-ports" onchange="calculateUPS()" class="w-full border-b border-slate-300 outline-none text-center font-bold text-xs bg-transparent pb-1">
-                                            <option value="0">Sin Switch</option>
-                                            <option value="4">4 Puertos (~80W)</option>
-                                            <option value="8">8 Puertos (~160W)</option>
-                                            <option value="16">16 Puertos (~320W)</option>
-                                            <option value="24">24 Puertos (~480W)</option>
+                                            <option value="0">Sin Switch</option><option value="4">4 Puertos (~80W)</option><option value="8">8 Puertos (~160W)</option><option value="16">16 Puertos (~320W)</option><option value="24">24 Puertos (~480W)</option>
                                         </select>
                                     </div>
                                     <div class="bg-slate-50 p-2 rounded text-center border border-slate-200">
@@ -627,17 +470,12 @@
                                         <input type="number" id="ups-nb-qty" min="0" value="0" oninput="calculateUPS()" class="w-full border-b border-slate-300 outline-none text-center font-bold text-xs bg-transparent py-1">
                                     </div>
                                 </div>
-
                                 <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 bg-blue-50 p-2.5 rounded border border-blue-100">
                                     <label class="text-[9px] font-bold text-blue-800 uppercase">Autonomía Deseada</label>
                                     <select id="ups-autonomy" onchange="calculateUPS()" class="p-1.5 w-full sm:w-auto border border-blue-200 rounded text-[9px] font-bold bg-white text-blue-800 outline-none">
-                                        <option value="0.25">Corte breve (10-15 min)</option>
-                                        <option value="0.5">Media hora (30 min)</option>
-                                        <option value="1">1 Hora</option>
-                                        <option value="2">2 Horas o más</option>
+                                        <option value="0.25">Corte breve (10-15 min)</option><option value="0.5">Media hora (30 min)</option><option value="1">1 Hora</option><option value="2">2 Horas o más</option>
                                     </select>
                                 </div>
-                                
                                 <div class="grid grid-cols-2 gap-2">
                                     <div class="bg-slate-100 p-2 rounded border border-slate-200 text-center shadow-sm">
                                         <span class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Carga Estimada</span>
@@ -648,7 +486,6 @@
                                         <span id="ups-rec-calc" class="text-[10px] leading-tight font-black text-blue-700 block">Ninguno</span>
                                     </div>
                                 </div>
-                                
                                 <div class="pt-1">
                                     <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Selección Final (Para Presupuesto)</label>
                                     <select id="ups-type" class="w-full p-2 border border-slate-200 rounded text-[10px] font-bold bg-white transition-colors">
@@ -664,7 +501,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <button onclick="addRackEnergy()" class="w-full bg-slate-800 text-white p-3 rounded-lg font-bold hover:bg-slate-900 transition text-[10px] uppercase shadow-md active:bg-slate-950">
                             Cargar Sección Rack
                         </button>
@@ -685,13 +521,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
                                 <div class="sm:col-span-2">
                                     <select id="tpr-type" class="w-full p-2.5 border border-emerald-200 rounded-lg text-xs font-bold bg-white">
-                                        <option value="2x1 mm²">2 x 1.0 mm²</option>
-                                        <option value="2x1.5 mm²">2 x 1.5 mm²</option>
-                                        <option value="2x2.5 mm²" selected>2 x 2.5 mm² (Recomendado)</option>
-                                        <option value="2x4 mm²">2 x 4.0 mm²</option>
-                                        <option value="3x1.5 mm²">3 x 1.5 mm² (Con Tierra)</option>
-                                        <option value="3x2.5 mm²">3 x 2.5 mm² (Con Tierra)</option>
-                                        <option value="3x4 mm²">3 x 4.0 mm² (Con Tierra)</option>
+                                        <option value="2x1 mm²">2 x 1.0 mm²</option><option value="2x1.5 mm²">2 x 1.5 mm²</option><option value="2x2.5 mm²" selected>2 x 2.5 mm² (Recomendado)</option><option value="2x4 mm²">2 x 4.0 mm²</option><option value="3x1.5 mm²">3 x 1.5 mm² (Con Tierra)</option><option value="3x2.5 mm²">3 x 2.5 mm² (Con Tierra)</option><option value="3x4 mm²">3 x 4.0 mm² (Con Tierra)</option>
                                     </select>
                                 </div>
                                 <div class="sm:col-span-1">
@@ -1393,109 +1223,6 @@
                             </div>
                         </div>
 
-                        <!-- BANDEJA METÁLICA -->
-                        <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
-                            <label class="flex items-center gap-2 cursor-pointer mb-2">
-                                <input type="checkbox" id="include-tray-conduit" onchange="toggleTrayConduitSection()" class="w-4 h-4 text-orange-600 rounded shrink-0">
-                                <span class="text-[9px] md:text-[10px] font-bold text-slate-700 uppercase leading-tight">Incluir Bandeja Metálica</span>
-                            </label>
-
-                            <div id="tray-conduit-container" class="space-y-3 hidden border-t border-orange-200 pt-3">
-                                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
-                                    <div class="sm:col-span-6">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Canalizado</label>
-                                        <select id="tray-conduit-type" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-slate-50" disabled>
-                                            <option value="Bandeja Portacable Ranurada">Bandeja Portacable Ranurada</option>
-                                        </select>
-                                    </div>
-                                    <div class="sm:col-span-6">
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
-                                        <select id="tray-conduit-size" onchange="updateTrayAccessoriesSize()" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-white">
-                                            <option value="38x38mm">38x38mm</option>
-                                            <option value="60x40mm">60x40mm</option>
-                                            <option value="100x50mm">100x50mm</option>
-                                            <option value="150x50mm">150x50mm</option>
-                                            <option value="200x50mm">200x50mm</option>
-                                            <option value="300x50mm">300x50mm</option>
-                                            <option value="450x50mm">450x50mm</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="bg-white p-2 rounded-lg border border-orange-100 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                    <div>
-                                        <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Montaje en</label>
-                                        <select id="tray-conduit-surface" class="w-full p-2 border border-orange-200 rounded-lg text-[10px] font-bold bg-slate-50">
-                                            <option value="Mampostería">Mampost. / Concreto</option>
-                                            <option value="Metal">Estruc. Metálica</option>
-                                        </select>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Unid. (3m)</label>
-                                            <input type="number" id="tray-conduit-units" data-length="3" min="0" value="0" oninput="calculateTrayMeters()" class="w-full p-2 border border-orange-200 rounded-lg text-center font-bold text-xs bg-white" placeholder="0">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Metros (Info)</label>
-                                            <input type="text" id="tray-meters-display" readonly value="0 m" class="w-full p-2 border border-orange-100 rounded-lg text-center font-bold text-xs bg-orange-100 text-orange-800 cursor-not-allowed">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Accesorios de Bandeja -->
-                                <div class="bg-white p-3 rounded-lg border border-orange-200 shadow-sm mt-3">
-                                    <label class="block text-[9px] font-black text-orange-600 uppercase mb-2">Accesorios (<span class="tray-size-label">38x38mm</span>)</label>
-                                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Unión de bandeja</label>
-                                            <input type="number" id="tray-acc-union" min="0" value="0" class="w-full p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-slate-50">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Curva Horiz. 90°</label>
-                                            <input type="number" id="tray-acc-curva-h" min="0" value="0" class="w-full p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-slate-50">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Derivación T</label>
-                                            <input type="number" id="tray-acc-te" min="0" value="0" class="w-full p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-slate-50">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Curva Vert. Ext.</label>
-                                            <input type="number" id="tray-acc-curva-ve" min="0" value="0" class="w-full p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-slate-50">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Curva Vert. Int.</label>
-                                            <input type="number" id="tray-acc-curva-vi" min="0" value="0" class="w-full p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-slate-50">
-                                        </div>
-                                        <div>
-                                            <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tapa de bandeja</label>
-                                            <input type="number" id="tray-acc-tapa" min="0" value="0" class="w-full p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-slate-50">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Soportes de Bandeja -->
-                                <div class="bg-white p-3 rounded-lg border border-orange-200 shadow-sm mt-3">
-                                    <label class="block text-[9px] font-black text-orange-600 uppercase mb-2">Soportes de Bandeja Ranurada</label>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        <div class="flex items-center justify-between bg-slate-50 border border-slate-200 p-2 rounded">
-                                            <div>
-                                                <span class="block text-[8px] font-bold text-slate-600 uppercase">Ménsula Reforzada para</span>
-                                                <span class="tray-size-label text-[10px] font-black text-orange-600 uppercase block">38x38mm</span>
-                                            </div>
-                                            <input type="number" id="tray-sup-mensula" min="0" value="0" class="w-16 p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-white shrink-0 ml-2">
-                                        </div>
-                                        <div class="flex items-center justify-between bg-slate-50 border border-slate-200 p-2 rounded">
-                                            <div>
-                                                <span class="block text-[8px] font-bold text-slate-600 uppercase">Soporte Colgante para</span>
-                                                <span class="tray-size-label text-[10px] font-black text-orange-600 uppercase block">38x38mm</span>
-                                            </div>
-                                            <input type="number" id="tray-sup-colgante" min="0" value="0" class="w-16 p-1.5 border border-orange-200 rounded text-center font-bold text-xs bg-white shrink-0 ml-2">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- CAJAS DE PASO -->
                         <div class="bg-orange-50/50 p-3 border border-orange-100 rounded-lg">
                             <label class="flex items-center gap-2 cursor-pointer mb-2">
@@ -1585,11 +1312,116 @@
                     </button>
                 </section>
 
-                <!-- 6. FIJACIONES Y TORNILLERIA -->
-                <section id="sec-fijaciones" class="section-step bg-red-50 rounded-xl border border-red-200 p-4 md:p-5 shadow-sm col-span-1 lg:col-span-2 border-dashed border-2 order-6">
+                <!-- 6. BANDEJAS METÁLICAS -->
+                <section id="sec-bandejas" class="section-step bg-yellow-50 rounded-xl border border-yellow-200 p-4 md:p-5 shadow-sm order-6">
+                    <h2 class="text-yellow-800 font-black mb-4 uppercase text-[10px] tracking-widest flex items-center gap-2">
+                        <span class="step-number bg-yellow-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">6</span>
+                        Canalizado de cables por bandeja metálica
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+                            <div class="sm:col-span-6">
+                                <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tipo de Canalizado</label>
+                                <select id="tray-conduit-type" class="w-full p-2 border border-yellow-200 rounded-lg text-[10px] font-bold bg-slate-50" disabled>
+                                    <option value="Bandeja Portacable Ranurada">Bandeja Portacable Ranurada</option>
+                                </select>
+                            </div>
+                            <div class="sm:col-span-6">
+                                <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Medida</label>
+                                <select id="tray-conduit-size" onchange="updateTrayAccessoriesSize()" class="w-full p-2 border border-yellow-200 rounded-lg text-[10px] font-bold bg-white">
+                                    <option value="38x38mm">38x38mm</option>
+                                    <option value="60x40mm">60x40mm</option>
+                                    <option value="100x50mm">100x50mm</option>
+                                    <option value="150x50mm">150x50mm</option>
+                                    <option value="200x50mm">200x50mm</option>
+                                    <option value="300x50mm">300x50mm</option>
+                                    <option value="450x50mm">450x50mm</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-2 rounded-lg border border-yellow-100 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Montaje en</label>
+                                <select id="tray-conduit-surface" class="w-full p-2 border border-yellow-200 rounded-lg text-[10px] font-bold bg-slate-50">
+                                    <option value="Mampostería">Mampost. / Concreto</option>
+                                    <option value="Metal">Estruc. Metálica</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Cant. Unid. (3m)</label>
+                                    <input type="number" id="tray-conduit-units" data-length="3" min="0" value="0" oninput="calculateTrayMeters()" class="w-full p-2 border border-yellow-200 rounded-lg text-center font-bold text-xs bg-white" placeholder="0">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Metros (Info)</label>
+                                    <input type="text" id="tray-meters-display" readonly value="0 m" class="w-full p-2 border border-yellow-100 rounded-lg text-center font-bold text-xs bg-yellow-100 text-yellow-800 cursor-not-allowed">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Accesorios de Bandeja -->
+                        <div class="bg-white p-3 rounded-lg border border-yellow-200 shadow-sm mt-3">
+                            <label class="block text-[9px] font-black text-yellow-600 uppercase mb-2">Accesorios (<span class="tray-size-label">38x38mm</span>)</label>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Unión de bandeja</label>
+                                    <input type="number" id="tray-acc-union" min="0" value="0" class="w-full p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-slate-50">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Curva Horiz. 90°</label>
+                                    <input type="number" id="tray-acc-curva-h" min="0" value="0" class="w-full p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-slate-50">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Derivación T</label>
+                                    <input type="number" id="tray-acc-te" min="0" value="0" class="w-full p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-slate-50">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Curva Vert. Ext.</label>
+                                    <input type="number" id="tray-acc-curva-ve" min="0" value="0" class="w-full p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-slate-50">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Curva Vert. Int.</label>
+                                    <input type="number" id="tray-acc-curva-vi" min="0" value="0" class="w-full p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-slate-50">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-500 uppercase mb-1">Tapa de bandeja</label>
+                                    <input type="number" id="tray-acc-tapa" min="0" value="0" class="w-full p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-slate-50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Soportes de Bandeja -->
+                        <div class="bg-white p-3 rounded-lg border border-yellow-200 shadow-sm mt-3">
+                            <label class="block text-[9px] font-black text-yellow-600 uppercase mb-2">Soportes de Bandeja Ranurada</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div class="flex items-center justify-between bg-slate-50 border border-slate-200 p-2 rounded">
+                                    <div>
+                                        <span class="block text-[8px] font-bold text-slate-600 uppercase">Ménsula Reforzada para</span>
+                                        <span class="tray-size-label text-[10px] font-black text-yellow-600 uppercase block">38x38mm</span>
+                                    </div>
+                                    <input type="number" id="tray-sup-mensula" min="0" value="0" class="w-16 p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-white shrink-0 ml-2">
+                                </div>
+                                <div class="flex items-center justify-between bg-slate-50 border border-slate-200 p-2 rounded">
+                                    <div>
+                                        <span class="block text-[8px] font-bold text-slate-600 uppercase">Soporte Colgante para</span>
+                                        <span class="tray-size-label text-[10px] font-black text-yellow-600 uppercase block">38x38mm</span>
+                                    </div>
+                                    <input type="number" id="tray-sup-colgante" min="0" value="0" class="w-16 p-1.5 border border-yellow-200 rounded text-center font-bold text-xs bg-white shrink-0 ml-2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addBandejas()" class="w-full bg-yellow-600 text-white p-3 rounded-lg font-bold hover:bg-yellow-700 transition text-[10px] uppercase shadow-md mt-4 active:bg-yellow-800">
+                        Cargar Bandejas Metálicas
+                    </button>
+                </section>
+
+                <!-- 7. FIJACIONES Y TORNILLERIA -->
+                <section id="sec-fijaciones" class="section-step bg-red-50 rounded-xl border border-red-200 p-4 md:p-5 shadow-sm col-span-1 lg:col-span-2 border-dashed border-2 order-7">
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 gap-2">
                         <h2 class="text-red-800 font-black uppercase text-[10px] tracking-widest flex items-center gap-2">
-                            <span class="step-number bg-red-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">6</span>
+                            <span class="step-number bg-red-600 text-white w-5 h-5 flex items-center justify-center rounded-full text-[10px] shrink-0">7</span>
                             Cálculo Automático de Fijaciones
                         </h2>
                     </div>
@@ -1693,9 +1525,6 @@
     <script>
         let currentItems = [];
 
-        // ----------------------------------------------------
-        // LÓGICA DE NAVEGACIÓN Y MÓDULOS
-        // ----------------------------------------------------
         function openModule(moduleName) {
             if (moduleName === 'redes-cctv') {
                 document.getElementById('view-home').style.display = 'none';
@@ -1748,18 +1577,13 @@
             }
         }
 
-        // ----------------------------------------------------
-        // NUEVO MOTOR PDF NATIVO (PARA MOVILES Y ESCRITORIO)
-        // ----------------------------------------------------
         function generatePDF() {
             const btnText = document.getElementById('btn-export-text');
             const originalText = btnText ? btnText.innerText : 'Guardar PDF';
             if (btnText) btnText.innerText = 'Generando...';
 
-            // Solución crucial para móviles: Subir al inicio antes de capturar
             window.scrollTo(0, 0);
 
-            // 1. Sincronizar todos los inputs y selectores
             document.querySelectorAll('#view-module-redes input').forEach(el => {
                 if(el.type === 'checkbox' || el.type === 'radio') {
                     if(el.checked) el.setAttribute('checked', 'checked');
@@ -1778,12 +1602,9 @@
                 });
             });
 
-            // 2. Activar la clase de renderizado limpio de PDF
             document.body.classList.add('pdf-mode');
-
             const element = document.getElementById('view-module-redes');
             
-            // 3. ENGAÑO AL NAVEGADOR MÓVIL: Forzar ancho a nivel de body y elemento
             const originalBodyWidth = document.body.style.width;
             const originalWidth = element.style.width;
             const originalMaxWidth = element.style.maxWidth;
@@ -1792,19 +1613,18 @@
             element.style.width = '1024px'; 
             element.style.maxWidth = '1024px';
 
-            // 4. Configurar opciones del generador
             const clientInput = document.getElementById('client-name');
             const clientName = clientInput && clientInput.value ? clientInput.value.trim().replace(/[^a-zA-Z0-9]/g, '_') : 'Proyecto';
             
             const opt = {
-                margin:       [10, 10, 10, 10], // Agregado margen superior e inferior seguro
+                margin:       [10, 10, 10, 10], 
                 filename:     `ApohAPP_${clientName}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { 
                     scale: 2, 
                     useCORS: true, 
                     windowWidth: 1024,
-                    width: 1024, // FORZAR AL LIENZO A TOMAR FOTO COMPLETA
+                    width: 1024, 
                     scrollY: 0, 
                     scrollX: 0
                 },
@@ -1812,7 +1632,6 @@
                 pagebreak:    { mode: 'css', avoid: ['section', 'tr'] } 
             };
 
-            // 5. Procesar y guardar
             html2pdf().set(opt).from(element).save().then(() => {
                 document.body.classList.remove('pdf-mode');
                 document.body.style.width = originalBodyWidth;
@@ -1830,10 +1649,6 @@
             });
         }
 
-
-        // ----------------------------------------------------
-        // LÓGICA EXISTENTE DE REDES Y CCTV
-        // ----------------------------------------------------
         let currentCurrency = 'USD';
         const currencies = {
             'USD': { symbol: '$', locale: 'en-US', fractionDigits: 2 },
@@ -2062,6 +1877,7 @@
                 document.getElementById('sec-rack'),
                 document.getElementById('sec-tpr'),
                 document.getElementById('sec-conduit'),
+                document.getElementById('sec-bandejas'), // Moved down
                 document.getElementById('sec-fijaciones')
             ];
 
@@ -2278,7 +2094,6 @@
                     totalAbrazaderas += item.quantity;
                     multiplier = 1;
                 } else if (desc.includes('soporte')) {
-                    // Ménsulas y Colgantes de bandeja
                     multiplier = 2; 
                 }
 
@@ -2703,19 +2518,9 @@
             renderTable();
         }
 
-        function toggleTrayConduitSection() {
-            const checkbox = document.getElementById('include-tray-conduit');
-            const container = document.getElementById('tray-conduit-container');
-            if (checkbox && container) {
-                if (checkbox.checked) {
-                    container.classList.remove('hidden');
-                    updateTrayAccessoriesSize(); // sync initial text
-                } else {
-                    container.classList.add('hidden');
-                }
-            }
-        }
-
+        // ==========================================
+        // NUEVA LÓGICA EXCLUSIVA DE BANDEJAS METÁLICAS
+        // ==========================================
         function calculateTrayMeters() {
             const unitsEl = document.getElementById('tray-conduit-units');
             const displayEl = document.getElementById('tray-meters-display');
@@ -2736,6 +2541,52 @@
             });
         }
 
+        function addBandejas() {
+            let itemAdded = false;
+            const unitsEl = document.getElementById('tray-conduit-units');
+            const units = unitsEl ? (parseInt(unitsEl.value) || 0) : 0;
+            const sizeEl = document.getElementById('tray-conduit-size');
+            const size = sizeEl ? sizeEl.value : '38x38mm';
+            const surfaceEl = document.getElementById('tray-conduit-surface');
+            const surface = surfaceEl ? surfaceEl.value : 'Mampostería';
+            
+            if (units > 0) {
+                pushConsolidated(`Bandeja Portacable Ranurada ${size}`, units, 'un', 0);
+                if(unitsEl) unitsEl.value = 0;
+                itemAdded = true;
+            }
+
+            // Accesorios de bandeja
+            const accUnion = parseInt(document.getElementById('tray-acc-union').value) || 0;
+            const accCurvaH = parseInt(document.getElementById('tray-acc-curva-h').value) || 0;
+            const accTe = parseInt(document.getElementById('tray-acc-te').value) || 0;
+            const accCurvaVe = parseInt(document.getElementById('tray-acc-curva-ve').value) || 0;
+            const accCurvaVi = parseInt(document.getElementById('tray-acc-curva-vi').value) || 0;
+            const accTapa = parseInt(document.getElementById('tray-acc-tapa').value) || 0;
+            
+            if (accUnion > 0) { pushConsolidated(`Unión de Bandeja Portacable Ranurada ${size}`, accUnion, 'un', 0, surface); document.getElementById('tray-acc-union').value = 0; itemAdded = true; }
+            if (accCurvaH > 0) { pushConsolidated(`Curva Horizontal 90° Bandeja Ranurada ${size}`, accCurvaH, 'un', 0, surface); document.getElementById('tray-acc-curva-h').value = 0; itemAdded = true; }
+            if (accTe > 0) { pushConsolidated(`Derivación T Bandeja Ranurada ${size}`, accTe, 'un', 0, surface); document.getElementById('tray-acc-te').value = 0; itemAdded = true; }
+            if (accCurvaVe > 0) { pushConsolidated(`Curva Vertical Externa Bandeja Ranurada ${size}`, accCurvaVe, 'un', 0, surface); document.getElementById('tray-acc-curva-ve').value = 0; itemAdded = true; }
+            if (accCurvaVi > 0) { pushConsolidated(`Curva Vertical Interna Bandeja Ranurada ${size}`, accCurvaVi, 'un', 0, surface); document.getElementById('tray-acc-curva-vi').value = 0; itemAdded = true; }
+            if (accTapa > 0) { pushConsolidated(`Tapa de Bandeja Ranurada ${size}`, accTapa, 'un', 0, surface); document.getElementById('tray-acc-tapa').value = 0; itemAdded = true; }
+
+            // Soportes de bandeja
+            const supMensula = parseInt(document.getElementById('tray-sup-mensula').value) || 0;
+            const supColgante = parseInt(document.getElementById('tray-sup-colgante').value) || 0;
+
+            if (supMensula > 0) { pushConsolidated(`Soporte Ménsula Reforzada para ${size}`, supMensula, 'un', 0, surface); document.getElementById('tray-sup-mensula').value = 0; itemAdded = true; }
+            if (supColgante > 0) { pushConsolidated(`Soporte Colgante para ${size}`, supColgante, 'un', 0, surface); document.getElementById('tray-sup-colgante').value = 0; itemAdded = true; }
+            
+            if (itemAdded) {
+                calculateTrayMeters();
+                renderTable();
+            }
+        }
+
+        // ==========================================
+        // LÓGICA DE CANALIZACIONES (RÍGIDA / FLEXIBLE)
+        // ==========================================
         function updateConduitOptions(index) {
             const typeSelect = document.getElementById(`conduit-type-${index}`);
             if (!typeSelect) return;
@@ -3010,47 +2861,6 @@
                 }
             }
 
-            // BANDEJA METÁLICA
-            const includeTray = document.getElementById('include-tray-conduit');
-            if (includeTray && includeTray.checked) {
-                const unitsEl = document.getElementById('tray-conduit-units');
-                const units = unitsEl ? (parseInt(unitsEl.value) || 0) : 0;
-                const sizeEl = document.getElementById('tray-conduit-size');
-                const size = sizeEl ? sizeEl.value : '';
-                const surfaceEl = document.getElementById('tray-conduit-surface');
-                const surface = surfaceEl ? surfaceEl.value : 'Mampostería';
-                
-                if (units > 0) {
-                    pushConsolidated(`Bandeja Portacable Ranurada ${size}`, units, 'un', 0);
-                    if(unitsEl) unitsEl.value = 0;
-                    itemAdded = true;
-                }
-
-                // Accesorios de bandeja
-                const accUnion = parseInt(document.getElementById('tray-acc-union').value) || 0;
-                const accCurvaH = parseInt(document.getElementById('tray-acc-curva-h').value) || 0;
-                const accTe = parseInt(document.getElementById('tray-acc-te').value) || 0;
-                const accCurvaVe = parseInt(document.getElementById('tray-acc-curva-ve').value) || 0;
-                const accCurvaVi = parseInt(document.getElementById('tray-acc-curva-vi').value) || 0;
-                const accTapa = parseInt(document.getElementById('tray-acc-tapa').value) || 0;
-                
-                if (accUnion > 0) { pushConsolidated(`Unión de Bandeja Portacable Ranurada ${size}`, accUnion, 'un', 0, surface); document.getElementById('tray-acc-union').value = 0; itemAdded = true; }
-                if (accCurvaH > 0) { pushConsolidated(`Curva Horizontal 90° Bandeja Ranurada ${size}`, accCurvaH, 'un', 0, surface); document.getElementById('tray-acc-curva-h').value = 0; itemAdded = true; }
-                if (accTe > 0) { pushConsolidated(`Derivación T Bandeja Ranurada ${size}`, accTe, 'un', 0, surface); document.getElementById('tray-acc-te').value = 0; itemAdded = true; }
-                if (accCurvaVe > 0) { pushConsolidated(`Curva Vertical Externa Bandeja Ranurada ${size}`, accCurvaVe, 'un', 0, surface); document.getElementById('tray-acc-curva-ve').value = 0; itemAdded = true; }
-                if (accCurvaVi > 0) { pushConsolidated(`Curva Vertical Interna Bandeja Ranurada ${size}`, accCurvaVi, 'un', 0, surface); document.getElementById('tray-acc-curva-vi').value = 0; itemAdded = true; }
-                if (accTapa > 0) { pushConsolidated(`Tapa de Bandeja Ranurada ${size}`, accTapa, 'un', 0, surface); document.getElementById('tray-acc-tapa').value = 0; itemAdded = true; }
-
-                // Soportes de bandeja
-                const supMensula = parseInt(document.getElementById('tray-sup-mensula').value) || 0;
-                const supColgante = parseInt(document.getElementById('tray-sup-colgante').value) || 0;
-
-                if (supMensula > 0) { pushConsolidated(`Soporte Ménsula Reforzada para ${size}`, supMensula, 'un', 0, surface); document.getElementById('tray-sup-mensula').value = 0; itemAdded = true; }
-                if (supColgante > 0) { pushConsolidated(`Soporte Colgante para ${size}`, supColgante, 'un', 0, surface); document.getElementById('tray-sup-colgante').value = 0; itemAdded = true; }
-                
-                if (units > 0) calculateTrayMeters();
-            }
-
             // CAJAS DE PASO
             const includeJunctionBox = document.getElementById('include-junction-box');
             if (includeJunctionBox && includeJunctionBox.checked) {
@@ -3292,7 +3102,6 @@
             renderTable();
         }
 
-        // Inicialización segura garantizando que el DOM está cargado
         document.addEventListener('DOMContentLoaded', function() {
             const dateEl = document.getElementById('doc-date');
             if (dateEl) dateEl.valueAsDate = new Date();
@@ -3309,6 +3118,7 @@
                 updateFlexConduitOptions(i);
             }
             updateJunctionBoxOptions();
+            updateTrayAccessoriesSize(); // Initialize tray sizes
         });
     </script> <script>
       if ('serviceWorker' in navigator) {
@@ -3317,5 +3127,7 @@
         });
       }
     </script>
+</body>
+</html>
 </body>
 </html>
